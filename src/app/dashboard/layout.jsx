@@ -10,7 +10,7 @@ const Layout = ({ children }) => {
                 {/* Add your header content here */}
                 <SideBar />
             </header>
-            <main className="m-7">
+            <main className="m-5 flex-1">
                 {children}
             </main>
             <footer>

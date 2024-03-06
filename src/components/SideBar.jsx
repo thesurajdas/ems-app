@@ -1,12 +1,13 @@
-import React from 'react';
 import Link from 'next/link';
 
 const SideBar = () => {
     const links = [
         { name: 'Dashboard', url: '/dashboard' },
         { name: 'Users', url: '/dashboard/users' },
-        { name: 'Settings', url: '/dashboard/settings' },
+        { name: 'Admit', url: '/dashboard/admit' },
+        { name: 'Result', url: '/dashboard/results' },
         { name: 'Profile', url: '/dashboard/profile' },
+        { name: 'Settings', url: '/dashboard/settings' },
     ];
 
     return (
