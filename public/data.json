@@ -1,0 +1,36 @@
+[{
+    "_id": {
+      "$oid": "65e2353fa34fa59828d24d2d"
+    },
+    "name": "John Doe",
+    "email": "john@example.com",
+    "password": "password123",
+    "role": "student",
+    "status": "active",
+    "reg_no": "AU/2024/001",
+    "roll_no": "SOET/2024/018",
+    "mobile_no": 1234567890,
+    "gender": "male",
+    "date_of_birth": {
+      "$date": "2000-01-01T00:00:00.000Z"
+    },
+    "profile_pic": "avatar.jpg",
+    "course": {
+      "school_name": "SOET",
+      "degree_name": "Bachelor",
+      "course_name": "Computer Science",
+      "current_semester": 3
+    },
+    "address": {
+      "street": "123 Main Street",
+      "state": "California",
+      "country": "USA"
+    },
+    "createdAt": {
+      "$date": "2024-03-01T20:06:23.675Z"
+    },
+    "updatedAt": {
+      "$date": "2024-03-01T20:06:23.675Z"
+    },
+    "__v": 0
+  }]

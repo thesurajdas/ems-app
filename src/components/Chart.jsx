@@ -1,5 +1,8 @@
 export default function Chart() {
   return (
-    <div>Chart</div>
+    <div>
+      <h2>Result Chart</h2>
+
+    </div>
   )
 }
