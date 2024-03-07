@@ -1,5 +1,6 @@
 
 export default function Dashboard() {
+
   return (
     <>
       <h1 className="text-gray-800 dark:text-gray-100 ml-4">Dashboard</h1>
