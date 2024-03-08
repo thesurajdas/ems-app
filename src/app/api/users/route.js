@@ -9,8 +9,8 @@ export async function GET(request) {
     const limit = Number(req.get("limit")) || 10;
     const skip = (page - 1) * limit;
     await connectMongoDB();
-    const data = await Users.find({ name: { "$regex": name, "$options": "i" } }).skip(skip).limit(limit);
-    return NextResponse.json({ data }, { status: 200 });
+    const users = await Users.find({ name: { "$regex": name, "$options": "i" } }).skip(skip).limit(limit);
+    return NextResponse.json({ users }, { status: 200 });
 }
 
 export async function POST(request) {
