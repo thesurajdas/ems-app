@@ -1,7 +1,9 @@
 import Image from 'next/image';
+import { LuCheck } from 'react-icons/lu';
+
 export default function TableRow({ users }) {
     return (
-        <tbody className="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900">
+        <>
             {
                 users.map((user) => (
                     <tr key={user._id}>
@@ -24,10 +26,7 @@ export default function TableRow({ users }) {
                         </td>
                         <td className="px-4 py-4 text-sm font-medium text-gray-700 whitespace-nowrap">
                             <div className="inline-flex items-center px-3 py-1 rounded-full gap-x-2 text-emerald-500 bg-emerald-100/60 dark:bg-gray-800">
-                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M10 3L4.5 8.5L2 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                                </svg>
-
+                                <LuCheck />
                                 <h2 className="text-sm font-normal">{user.status}</h2>
                             </div>
                         </td>
@@ -46,6 +45,6 @@ export default function TableRow({ users }) {
                         </td>
                     </tr>
                 ))}
-        </tbody>
+        </>
     )
 }
