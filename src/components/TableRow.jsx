@@ -1,7 +1,27 @@
 import Image from 'next/image';
-import { LuCheck } from 'react-icons/lu';
+import { LuCheck, LuX } from 'react-icons/lu';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+
+const UserStatus = ({ data }) => {
+    if (data == "active") {
+        return (
+            <div className="inline-flex items-center px-3 py-1 rounded-full gap-x-2 text-emerald-500 bg-emerald-100/60 dark:bg-gray-800">
+                <LuCheck />
+                <h2 className="text-sm font-normal">{data}</h2>
+            </div>
+        )
+    }
+    return (
+        <div className="inline-flex items-center px-3 py-1 rounded-full gap-x-2 text-red-500 bg-red-100/60 dark:bg-gray-800">
+            <LuX />
+            <h2 className="text-sm font-normal">{data}</h2>
+        </div>
+    )
+}
 
 export default function TableRow({ users }) {
+    const pathname = usePathname();
     return (
         <>
             {
@@ -25,22 +45,19 @@ export default function TableRow({ users }) {
                             <p className="text-xs font-normal text-gray-600 dark:text-gray-400">{user.email}</p>
                         </td>
                         <td className="px-4 py-4 text-sm font-medium text-gray-700 whitespace-nowrap">
-                            <div className="inline-flex items-center px-3 py-1 rounded-full gap-x-2 text-emerald-500 bg-emerald-100/60 dark:bg-gray-800">
-                                <LuCheck />
-                                <h2 className="text-sm font-normal">{user.status}</h2>
-                            </div>
+                            <UserStatus data={user.status} />
                         </td>
                         <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">{user.role}</td>
                         <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">{user.createdAt}</td>
                         <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">MCA</td>
                         <td className="px-4 py-4 text-sm whitespace-nowrap">
                             <div className="flex items-center gap-x-6">
-                                <button className="text-gray-500 transition-colors duration-200 dark:hover:text-indigo-500 dark:text-gray-300 hover:text-indigo-500 focus:outline-none">
+                                <Link href={pathname + "/edit/" + user._id} className="text-gray-500 transition-colors duration-200 dark:hover:text-indigo-500 dark:text-gray-300 hover:text-indigo-500 focus:outline-none">
                                     Edit
-                                </button>
-                                <button className="text-blue-500 transition-colors duration-200 hover:text-indigo-500 focus:outline-none">
+                                </Link>
+                                <Link href={pathname + "/" + user._id} className="text-blue-500 transition-colors duration-200 hover:text-indigo-500 focus:outline-none">
                                     View
-                                </button>
+                                </Link>
                             </div>
                         </td>
                     </tr>

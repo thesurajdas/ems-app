@@ -1,6 +1,9 @@
 
-export default function profile() {
+export default function profile({params}) {
+  const {id} = params;
   return (
-    <div>View User profile</div>
+    <>
+    <h1>View User Profile: {id}</h1>
+    </>
   )
 }

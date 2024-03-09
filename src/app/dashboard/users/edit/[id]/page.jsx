@@ -1,6 +1,9 @@
 
-export default function editProfile() {
+export default function editProfile({ params }) {
+  const {id} = params;
   return (
-    <div>editProfile</div>
+    <>
+      <h1>Edit Profile ID: {id}</h1>
+    </>
   )
 }
