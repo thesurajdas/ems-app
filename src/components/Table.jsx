@@ -6,15 +6,17 @@ import { LuFilter } from 'react-icons/lu';
 export default function Table() {
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [search, setSearch] = useState("");
     useEffect(() => {
-        const fetchData = async () => {
-            const response = await fetch('/api/users');
+        const fetchData = async (name) => {
+            const response = await fetch(`/api/users?q=${name}`);
             const result = await response.json();
             setData(result);
             setLoading(true);
+            console.log(name)
         }
-        fetchData();
-    }, []);
+        fetchData(search);
+    }, [search]);
     return (
         <>
             {/* component */}
@@ -54,21 +56,16 @@ export default function Table() {
                                                 Course
                                             </th>
                                             <th scope="col" className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                                                <input type="search" placeholder="Search..." className="dark:bg-gray-700 rounded-xl py-2 px-4 outline-none w-full" />
+                                                <input type="search" onChange={(e) => setSearch(e.target.value)} placeholder="Search..." className="dark:bg-gray-700 rounded-xl py-2 px-4 outline-none w-full" />
                                             </th>
                                         </tr>
                                     </thead>
                                     <tbody className="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900 overflow-auto">
                                         {!loading ? Array(7).fill(0).map((e, id) => (
                                             <tr key={id} className="transition animate-pulse">
-                                                <td className="p-2"><div className="bg-slate-300 m-2 w-full h-5 rounded-full"></div></td>
-                                                <td className="p-2"><div className="bg-slate-300 m-2 w-full h-5 rounded-full"></div></td>
-                                                <td className="p-2"><div className="bg-slate-300 m-2 w-full h-5 rounded-full"></div></td>
-                                                <td className="p-2"><div className="bg-slate-300 m-2 w-full h-5 rounded-full"></div></td>
-                                                <td className="p-2"><div className="bg-slate-300 m-2 w-full h-5 rounded-full"></div></td>
-                                                <td className="p-2"><div className="bg-slate-300 m-2 w-full h-5 rounded-full"></div></td>
-                                                <td className="p-2"><div className="bg-slate-300 m-2 w-full h-5 rounded-full"></div></td>
-                                                <td className="p-2"><div className="bg-slate-300 m-2 w-full h-5 rounded-full"></div></td>
+                                                {Array(8).fill(0).map((e, id) => (
+                                                    <td key={id} className="p-2"><div className="bg-slate-300 m-2 w-full h-5 rounded-full"></div></td>
+                                                ))}
                                             </tr>
                                         )) : (
                                             <TableRow users={data.users} />

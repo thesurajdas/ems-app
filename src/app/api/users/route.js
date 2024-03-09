@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 
 export async function GET(request) {
     const req = request.nextUrl.searchParams;
-    const name = req.get("name") || "";
+    const name = req.get("q") || "";
     const page = Number(req.get("page")) || 1;
     const limit = Number(req.get("limit")) || 10;
     const skip = (page - 1) * limit;
