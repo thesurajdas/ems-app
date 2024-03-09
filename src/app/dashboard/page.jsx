@@ -1,3 +1,4 @@
+import Chart from "@/components/Chart";
 
 export default function Dashboard() {
 
@@ -23,13 +24,13 @@ export default function Dashboard() {
           <div className="bg-white dark:bg-gray-700 p-4 rounded-lg shadow">
             <h2 className="text-xl text-gray-800 dark:text-gray-100">Graph 1</h2>
             <div className="h-64">
-              <canvas id="line-chart"></canvas>
+              <Chart />
             </div>
           </div>
           <div className="bg-white dark:bg-gray-700 p-4 rounded-lg shadow">
             <h2 className="text-xl text-gray-800 dark:text-gray-100">Graph 2</h2>
             <div className="h-64">
-              <canvas id="line-chart"></canvas>
+              <Chart />
             </div>
           </div>
         </section>
