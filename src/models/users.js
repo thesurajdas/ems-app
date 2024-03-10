@@ -12,7 +12,7 @@ const usersSchema = new Schema(
         mobile_no: { type: Number, required: true },
         gender: { type: String, required: true },
         date_of_birth: { type: Date, required: true },
-        profile_pic: { type: String, required: true, default: "avatar.jpg" },
+        avatar: { type: String, required: true, default: "avatar.jpg" },
         address: {
             street: { type: String, required: true },
             state: { type: String, required: true },

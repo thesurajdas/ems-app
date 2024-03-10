@@ -8,17 +8,18 @@ const UserStatus = ({ data }) => {
         return (
             <div className="inline-flex items-center px-3 py-1 rounded-full gap-x-2 text-emerald-500 bg-emerald-100/60 dark:bg-gray-800">
                 <LuCheck />
-                <h2 className="text-sm font-normal">{data}</h2>
+                <span className="font-normal">{data}</span>
             </div>
         )
     }
     return (
         <div className="inline-flex items-center px-3 py-1 rounded-full gap-x-2 text-red-500 bg-red-100/60 dark:bg-gray-800">
             <LuX />
-            <h2 className="text-sm font-normal">{data}</h2>
+            <span className="font-normal">{data}</span>
         </div>
     )
 }
+export { UserStatus };
 
 export default function TableRow({ users }) {
     const pathname = usePathname();
@@ -42,7 +43,7 @@ export default function TableRow({ users }) {
                         </td>
                         <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
                             <div className="flex items-center gap-x-2">
-                                <Image className="object-cover rounded-full" src={"/" + user.profile_pic} alt="" height={32} width={32} />
+                                <Image className="object-cover rounded-full" src={"/" + user.avatar} alt="" height={32} width={32} />
                                 <div>
                                     <h2 className="text-sm font-medium text-gray-800 dark:text-white ">{user.name}</h2>
                                 </div>

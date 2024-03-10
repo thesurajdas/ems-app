@@ -1,14 +1,12 @@
 "use client";
 import { useState, useEffect } from 'react';
-import { LuArrowRight, LuArrowLeft, LuFilter } from 'react-icons/lu';
+import { LuFilter } from 'react-icons/lu';
 import TableRow from './TableRow';
 import { usePathname } from 'next/navigation';
 import { useRouter } from 'next/navigation';
 import Pagination from './Pagination';
 
 export default function Table() {
-    const pathname = usePathname();
-    const router = useRouter();
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(false);
     const [search, setSearch] = useState("");
@@ -18,7 +16,7 @@ export default function Table() {
     const totalPage = Math.ceil(totalData / limit);
     useEffect(() => {
         const fetchData = async (search, page) => {
-            const response = await fetch(`/api/users?q=${search}&page=${page}&limit=${limit}`);
+            const response = await fetch(`/api/users?q=${search}&page=${page}&limit=${limit}`, { cache: 'no-store' });
             const result = await response.json();
             setData(result);
             setLoading(true);
