@@ -1,22 +1,31 @@
 "use client";
 import { useState, useEffect } from 'react';
+import { LuArrowRight, LuArrowLeft, LuFilter } from 'react-icons/lu';
 import TableRow from './TableRow';
-import { LuFilter } from 'react-icons/lu';
+import { usePathname } from 'next/navigation';
+import { useRouter } from 'next/navigation';
+import Pagination from './Pagination';
 
 export default function Table() {
+    const pathname = usePathname();
+    const router = useRouter();
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(false);
     const [search, setSearch] = useState("");
+    const [page, setPage] = useState(1);
+    const [totalData, setTotalData] = useState(1);
+    const limit = 5;
+    const totalPage = Math.ceil(totalData / limit);
     useEffect(() => {
-        const fetchData = async (name) => {
-            const response = await fetch(`/api/users?q=${name}`);
+        const fetchData = async (search, page) => {
+            const response = await fetch(`/api/users?q=${search}&page=${page}&limit=${limit}`);
             const result = await response.json();
             setData(result);
             setLoading(true);
-            console.log(name)
+            setTotalData(result.length);
         }
-        fetchData(search);
-    }, [search]);
+        fetchData(search, page);
+    }, [search, page]);
     return (
         <>
             {/* component */}
@@ -56,15 +65,15 @@ export default function Table() {
                                                 Course
                                             </th>
                                             <th scope="col" className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                                                <input type="search" onChange={(e) => setSearch(e.target.value)} placeholder="Search..." className="dark:bg-gray-700 rounded-xl py-2 px-4 outline-none w-full" />
+                                                <input type="search" onChange={(e) => setSearch(e.target.value)} placeholder="Search..." className="dark:bg-gray-700 bg-gray-200 rounded-xl py-2 px-4 outline-none w-full" />
                                             </th>
                                         </tr>
                                     </thead>
                                     <tbody className="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900 overflow-auto">
-                                        {!loading ? Array(7).fill(0).map((e, id) => (
+                                        {!loading ? Array(limit).fill(0).map((e, id) => (
                                             <tr key={id} className="transition animate-pulse">
                                                 {Array(8).fill(0).map((e, id) => (
-                                                    <td key={id} className="p-2"><div className="bg-slate-300 m-2 w-full h-5 rounded-full"></div></td>
+                                                    <td key={id} className="p-2"><div className="bg-slate-300 m-2 w-full h-7 rounded-full"></div></td>
                                                 ))}
                                             </tr>
                                         )) : (
@@ -77,31 +86,10 @@ export default function Table() {
                     </div>
                 </div>
                 <div className="flex items-center justify-between mt-6">
-                    <a href="#" className="flex items-center px-5 py-2 text-sm text-gray-700 capitalize transition-colors duration-200 bg-white border rounded-md gap-x-2 hover:bg-gray-100 dark:bg-gray-900 dark:text-gray-200 dark:border-gray-700 dark:hover:bg-gray-800">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-5 h-5 rtl:-scale-x-100">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 15.75L3 12m0 0l3.75-3.75M3 12h18" />
-                        </svg>
-                        <span>
-                            previous
-                        </span>
-                    </a>
-                    <div className="items-center hidden md:flex gap-x-3">
-                        <a href="#" className="px-2 py-1 text-sm text-blue-500 rounded-md dark:bg-gray-800 bg-blue-100/60">1</a>
-                        <a href="#" className="px-2 py-1 text-sm text-gray-500 rounded-md dark:hover:bg-gray-800 dark:text-gray-300 hover:bg-gray-100">2</a>
-                        <a href="#" className="px-2 py-1 text-sm text-gray-500 rounded-md dark:hover:bg-gray-800 dark:text-gray-300 hover:bg-gray-100">3</a>
-                        <a href="#" className="px-2 py-1 text-sm text-gray-500 rounded-md dark:hover:bg-gray-800 dark:text-gray-300 hover:bg-gray-100">...</a>
-                        <a href="#" className="px-2 py-1 text-sm text-gray-500 rounded-md dark:hover:bg-gray-800 dark:text-gray-300 hover:bg-gray-100">12</a>
-                        <a href="#" className="px-2 py-1 text-sm text-gray-500 rounded-md dark:hover:bg-gray-800 dark:text-gray-300 hover:bg-gray-100">13</a>
-                        <a href="#" className="px-2 py-1 text-sm text-gray-500 rounded-md dark:hover:bg-gray-800 dark:text-gray-300 hover:bg-gray-100">14</a>
-                    </div>
-                    <a href="#" className="flex items-center px-5 py-2 text-sm text-gray-700 capitalize transition-colors duration-200 bg-white border rounded-md gap-x-2 hover:bg-gray-100 dark:bg-gray-900 dark:text-gray-200 dark:border-gray-700 dark:hover:bg-gray-800">
-                        <span>
-                            Next
-                        </span>
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-5 h-5 rtl:-scale-x-100">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
-                        </svg>
-                    </a>
+                    <p className="text-sm text-gray-700 dark:text-gray-300">
+                        Total Users: {totalData}
+                    </p>
+                    <Pagination page={page} setPage={setPage} totalPage={totalPage} />
                 </div>
             </section >
         </>

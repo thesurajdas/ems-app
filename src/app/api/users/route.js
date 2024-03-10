@@ -6,11 +6,12 @@ export async function GET(request) {
     const req = request.nextUrl.searchParams;
     const name = req.get("q") || "";
     const page = Number(req.get("page")) || 1;
-    const limit = Number(req.get("limit")) || 10;
+    const limit = Number(req.get("limit")) || 5;
     const skip = (page - 1) * limit;
     await connectMongoDB();
+    const length = await Users.countDocuments({ name: { "$regex": name, "$options": "i" }});
     const users = await Users.find({ name: { "$regex": name, "$options": "i" } }).skip(skip).limit(limit);
-    return NextResponse.json({ users }, { status: 200 });
+    return NextResponse.json({ users, length }, { status: 200 });
 }
 
 export async function POST(request) {

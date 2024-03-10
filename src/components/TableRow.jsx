@@ -22,6 +22,13 @@ const UserStatus = ({ data }) => {
 
 export default function TableRow({ users }) {
     const pathname = usePathname();
+    if (!users.length) {
+        return (
+            <tr>
+                <td colSpan="8" className="text-center font-extralight text-3xl py-4 text-gray-500 dark:text-gray-300">No User Found!</td>
+            </tr>
+        )
+    }
     return (
         <>
             {
