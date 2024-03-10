@@ -33,8 +33,8 @@ export default function ViewProfile({ id }) {
                     <p className="text-2xl font-light">Registration Number: {profile.reg_no}</p>
                     <p className="text-2xl font-light">Roll Number: {profile.roll_no}</p>
                     <p className="text-2xl font-light">Mobile Number: {profile.mobile_no}</p>
-                    <p className="text-2xl font-light">Gender: {profile.date_of_birth}</p>
-                    <p className="text-2xl font-light">Date of Birth: {profile.gender}</p>
+                    <p className="text-2xl font-light">Gender: {profile.gender}</p>
+                    <p className="text-2xl font-light">Date of Birth: {profile.date_of_birth}</p>
                     <p className="text-2xl font-light">Address: {profile.address.state + ", " + profile.address.country}</p>
                 </div>
             )

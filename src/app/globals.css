@@ -9,4 +9,10 @@
     h2 {
         @apply text-2xl;
     }
+    input{
+        @apply outline-none dark:bg-slate-800 text-gray-800 dark:text-white rounded-2xl w-full p-4 text-xl font-light;
+    }
+    label {
+        @apply text-xl font-light text-gray-500;
+    }
 }
