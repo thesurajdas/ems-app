@@ -9,7 +9,7 @@ const usersSchema = new Schema(
         status: { type: String, required: true, default: "active" },
         reg_no: { type: String, required: true },
         roll_no: { type: String, required: true },
-        mobile_no: { type: Number, required: true },
+        mobile_no: { type: String, required: true },
         gender: { type: String, required: true },
         date_of_birth: { type: Date, required: true },
         avatar: { type: String, required: true, default: "avatar.jpg" },

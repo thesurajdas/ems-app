@@ -9,10 +9,13 @@
     h2 {
         @apply text-2xl;
     }
-    input{
-        @apply outline-none dark:bg-slate-800 text-gray-800 dark:text-white rounded-2xl w-full p-4 text-xl font-light;
+    input[type=text],input[type=email], input[type=password], input[type=number], input[type=date], input[type=tel], input[type=textarea]{
+        @apply outline-none dark:bg-slate-800 text-gray-800 dark:text-white placeholder-gray-600 rounded-2xl w-full p-4 text-xl font-light;
     }
     label {
-        @apply text-xl font-light text-gray-500;
+        @apply text-xl font-normal text-gray-500;
+    }
+    select{
+        @apply outline-none appearance-auto bg-slate-50 dark:bg-slate-800 p-4 rounded-2xl w-full;
     }
 }
