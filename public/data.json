@@ -1,36 +1,140 @@
-[{
-    "_id": {
-      "$oid": "65e2353fa34fa59828d24d2d"
+{
+  "students": [
+    {
+      "_id": 1,
+      "name": "John Doe",
+      "age": 20,
+      "courses": [
+        {
+          "course_id": 101,
+          "course_name": "Mathematics"
+        },
+        {
+          "course_id": 102,
+          "course_name": "Physics"
+        }
+      ]
     },
-    "name": "John Doe",
-    "email": "john@example.com",
-    "password": "password123",
-    "role": "student",
-    "status": "active",
-    "reg_no": "AU/2024/001",
-    "roll_no": "SOET/2024/018",
-    "mobile_no": 1234567890,
-    "gender": "male",
-    "date_of_birth": {
-      "$date": "2000-01-01T00:00:00.000Z"
+    {
+      "_id": 2,
+      "name": "Jane Smith",
+      "age": 21,
+      "courses": [
+        {
+          "course_id": 101,
+          "course_name": "Mathematics"
+        },
+        {
+          "course_id": 103,
+          "course_name": "Chemistry"
+        }
+      ]
+    }
+  ],
+  "courses": [
+    {
+      "_id": 101,
+      "name": "Mathematics",
+      "subjects": [
+        {
+          "subject_name": "Algebra",
+          "total_marks": 100
+        },
+        {
+          "subject_name": "Geometry",
+          "total_marks": 80
+        },
+        {
+          "subject_name": "Calculus",
+          "total_marks": 120
+        }
+      ]
     },
-    "profile_pic": "avatar.jpg",
-    "course": {
-      "school_name": "SOET",
-      "degree_name": "Bachelor",
-      "course_name": "Computer Science",
-      "current_semester": 3
+    {
+      "_id": 102,
+      "name": "Physics",
+      "subjects": [
+        {
+          "subject_name": "Mechanics",
+          "total_marks": 90
+        },
+        {
+          "subject_name": "Electromagnetism",
+          "total_marks": 110
+        },
+        {
+          "subject_name": "Thermodynamics",
+          "total_marks": 100
+        }
+      ]
     },
-    "address": {
-      "street": "123 Main Street",
-      "state": "California",
-      "country": "USA"
+    {
+      "_id": 103,
+      "name": "Chemistry",
+      "subjects": [
+        {
+          "subject_name": "Organic Chemistry",
+          "total_marks": 95
+        },
+        {
+          "subject_name": "Inorganic Chemistry",
+          "total_marks": 85
+        },
+        {
+          "subject_name": "Physical Chemistry",
+          "total_marks": 105
+        }
+      ]
+    }
+  ],
+  "exams": [
+    {
+      "_id": 1,
+      "course_id": 101,
+      "subject": "Algebra",
+      "date": "2024-03-10"
     },
-    "createdAt": {
-      "$date": "2024-03-01T20:06:23.675Z"
+    {
+      "_id": 2,
+      "course_id": 102,
+      "subject": "Mechanics",
+      "date": "2024-03-12"
     },
-    "updatedAt": {
-      "$date": "2024-03-01T20:06:23.675Z"
+    {
+      "_id": 3,
+      "course_id": 103,
+      "subject": "Organic Chemistry",
+      "date": "2024-03-15"
+    }
+  ],
+  "results": [
+    {
+      "student_id": 1,
+      "exam_id": 1,
+      "marks": {
+        "Algebra": 85
+      }
     },
-    "__v": 0
-  }]
+    {
+      "student_id": 1,
+      "exam_id": 2,
+      "marks": {
+        "Mechanics": 78
+      }
+    },
+    {
+      "student_id": 2,
+      "exam_id": 1,
+      "marks": {
+        "Algebra": 92
+      }
+    },
+    {
+      "student_id": 2,
+      "exam_id": 3,
+      "marks": {
+        "Organic Chemistry": 80
+      }
+    }
+  ]
+}

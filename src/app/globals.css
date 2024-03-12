@@ -1,4 +1,8 @@
 @tailwind base;
+* {
+    scrollbar-width: thin;
+    scrollbar-color: var(--secondary) var(--primary);
+  }
 @tailwind components;
 @tailwind utilities;
 
@@ -9,7 +13,7 @@
     h2 {
         @apply text-2xl;
     }
-    input[type=text],input[type=email], input[type=password], input[type=number], input[type=date], input[type=tel], input[type=textarea]{
+    input[type=text], textarea,input[type=email], input[type=password], input[type=number], input[type=date], input[type=tel], input[type=file]{
         @apply outline-none dark:bg-slate-800 text-gray-800 dark:text-white placeholder-gray-600 rounded-2xl w-full p-4 text-xl font-light;
     }
     label {

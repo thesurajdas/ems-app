@@ -3,6 +3,7 @@ import { useState } from "react";
 
 export default function CreateUser() {
   // const year = new Date().getFullYear();
+  const courses = ["B.Tech", "M.Tech", "MBA", "BCA", "MCA", "BBA", "B.Com", "M.Com", "B.Sc", "M.Sc"];
   const [data, setData] = useState({});
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -11,6 +12,7 @@ export default function CreateUser() {
   const [status, setStatus] = useState("active");
   const [gender, setGender] = useState("male");
   const [dob, setDob] = useState();
+  const [course, setCourse] = useState("");
   const handleStatus = (e) => {
     setStatus(e.target.value);
   }
@@ -21,7 +23,7 @@ export default function CreateUser() {
   }
   return (
     <>
-      <form onSubmit={createUser}>
+      <form onSubmit={createUser} method="POST" encType="multipart/form-data">
         <div className="container w-full mx-auto grid grid-cols-3 gap-4 rounded py-4">
           <label htmlFor="name">Name:
             <input type="text" id="name" onChange={(e) => setName(e.target.value)} placeholder="Name" />
@@ -62,12 +64,32 @@ export default function CreateUser() {
           <label htmlFor="dob">Date of Birth:
             <input type="date" id="dob" onChange={(e) => setDob(e.target.value)} />
           </label>
-          <label htmlFor="reg_no">Registration No.:
+          <label htmlFor="avatar">Profile Picture:
+            <input type="file" id="avatar" accept="image/*" />
+          </label>
+          <label htmlFor="address">Address:
+            <textarea name="address" rows={1} placeholder="Street Name"></textarea>
+          </label>
+          <label htmlFor="state">State:
+            <input type="text" id="state" placeholder="State" />
+          </label>
+          <label htmlFor="country">Country:
+            <input type="text" id="country" placeholder="Country" />
+          </label>
+          <label htmlFor="course">Course:
+            <select id="course" value={course} onChange={(e) => setCourse(e.target.value)}>
+              {courses.map((course, index) => (
+                <option key={index} value={course}>{course}</option>
+              ))  
+              }
+            </select>
+          </label>
+          {/* <label htmlFor="reg_no">Registration No.:
             <input type="text" id="reg_no" value="AU/YYYY/****" disabled />
           </label>
           <label htmlFor="roll_no">Roll No.:
             <input type="text" id="roll_no" value={"UG/COURSE/YYYY/****"} disabled />
-          </label>
+          </label> */}
         </div>
         <button type="submit" className="bg-blue-500 hover:bg-blue-600 text-white py-3 px-7 rounded-3xl">Create</button>
       </form>

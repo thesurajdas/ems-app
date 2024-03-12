@@ -4,7 +4,7 @@ import { IoMdArrowDown } from "react-icons/io";
 export default function NavBar() {
     return (
         <>
-            <div className="flex justify-between items-center ">
+            <div className="flex justify-between items-center m-2">
                 <div className="flex-1 p-4">
                     <input className="shadow py-3 px-4 text-black bg-slate-200 dark:bg-gray-700 dark:text-white rounded-xl w-full outline-none" type="search" name="keyword" id="keyword" placeholder="Search..." />
                 </div>
