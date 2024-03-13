@@ -25,19 +25,19 @@ export default function CreateUser() {
     <>
       <form onSubmit={createUser} method="POST" encType="multipart/form-data">
         <div className="container w-full mx-auto grid grid-cols-3 gap-4 rounded py-4">
-          <label htmlFor="name">Name:
+          <label htmlFor="name">Name <span className="text-gray-500">*</span>
             <input type="text" id="name" onChange={(e) => setName(e.target.value)} placeholder="Name" />
           </label>
-          <label htmlFor="email">Email:
+          <label htmlFor="email">Email <span className="text-gray-500">*</span>
             <input type="email" id="email" onChange={(e) => setEmail(e.target.value)} placeholder="Email" />
           </label>
-          <label htmlFor="mobile">Mobile No.:
+          <label htmlFor="mobile">Mobile No. <span className="text-gray-500">*</span>
             <input type="tel" id="mobile" onChange={(e) => setMobile(e.target.value)} placeholder="Mobile Number" />
           </label>
-          <label htmlFor="password">Password:
+          <label htmlFor="password">Password <span className="text-gray-500">*</span>
             <input type="password" id="password" placeholder="Password" />
           </label>
-          <label htmlFor="role">Role:
+          <label htmlFor="role">Role <span className="text-gray-500">*</span>
             <div>
               <select id="role" value={role} onChange={(e) => setRole(e.target.value)}>
                 <option value="teacher">Teacher</option>
@@ -45,7 +45,7 @@ export default function CreateUser() {
               </select>
             </div>
           </label>
-          <label htmlFor="password">Status:
+          <label htmlFor="password">Status <span className="text-gray-500">*</span>
             <div className="flex gap-5 items-center w-full justify-center mt-4">
               <input type="radio" id="active" name="status" value="active" onChange={handleStatus} />
               <label htmlFor="active">Active</label>
@@ -53,7 +53,7 @@ export default function CreateUser() {
               <label htmlFor="inactive">Inactive</label>
             </div>
           </label>
-          <label htmlFor="gender">Gender:
+          <label htmlFor="gender">Gender <span className="text-gray-500">*</span>
             <div>
               <select id="gender" value={gender} onChange={(e) => setGender(e.target.value)}>
                 <option value="male">Male</option>
@@ -61,26 +61,26 @@ export default function CreateUser() {
               </select>
             </div>
           </label>
-          <label htmlFor="dob">Date of Birth:
+          <label htmlFor="dob">Date of Birth <span className="text-gray-500">*</span>
             <input type="date" id="dob" onChange={(e) => setDob(e.target.value)} />
           </label>
-          <label htmlFor="avatar">Profile Picture:
+          <label htmlFor="avatar">Profile Picture (Optional)
             <input type="file" id="avatar" accept="image/*" />
           </label>
-          <label htmlFor="address">Address:
+          <label htmlFor="address">Address <span className="text-gray-500">*</span>
             <textarea name="address" rows={1} placeholder="Street Name"></textarea>
           </label>
-          <label htmlFor="state">State:
+          <label htmlFor="state">State <span className="text-gray-500">*</span>
             <input type="text" id="state" placeholder="State" />
           </label>
-          <label htmlFor="country">Country:
+          <label htmlFor="country">Country <span className="text-gray-500">*</span>
             <input type="text" id="country" placeholder="Country" />
           </label>
-          <label htmlFor="course">Course:
+          <label htmlFor="course">Course <span className="text-gray-500">*</span>
             <select id="course" value={course} onChange={(e) => setCourse(e.target.value)}>
               {courses.map((course, index) => (
                 <option key={index} value={course}>{course}</option>
-              ))  
+              ))
               }
             </select>
           </label>

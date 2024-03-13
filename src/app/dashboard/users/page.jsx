@@ -1,7 +1,7 @@
 import Table from "@/components/Table";
 import Link from "next/link";
 
-export default function users() {
+export default function UsersPage() {
   return (
     <>
       <h1 className="ml-4">Users</h1>

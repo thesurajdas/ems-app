@@ -1,7 +1,7 @@
 "use client";
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { LuLayoutDashboard, LuFileSpreadsheet, LuFileCheck, LuSettings, LuUser2, LuUsers } from "react-icons/lu";
+import { LuLayoutDashboard, LuFileSpreadsheet, LuFileCheck, LuSettings, LuUser2, LuUsers, LuFileBarChart2, LuBook } from "react-icons/lu";
 const SideBar = () => {
 
     const pathname = usePathname();
@@ -12,8 +12,10 @@ const SideBar = () => {
     const links = [
         { name: 'Dashboard', url: '/dashboard', icon: <LuLayoutDashboard /> },
         { name: 'Users', url: '/dashboard/users', icon: <LuUsers /> },
+        { name: 'Courses', url: '/dashboard/courses', icon: <LuBook /> },
         { name: 'Admit', url: '/dashboard/admit', icon: <LuFileCheck /> },
         { name: 'Result', url: '/dashboard/results', icon: <LuFileSpreadsheet /> },
+        { name: 'Result Analysis', url: '/dashboard/analysis', icon: <LuFileBarChart2 /> },
         { name: 'Profile', url: '/dashboard/profile', icon: <LuUser2 /> },
         { name: 'Settings', url: '/dashboard/settings', icon: <LuSettings /> },
     ];
