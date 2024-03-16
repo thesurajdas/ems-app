@@ -84,12 +84,6 @@ export default function CreateUser() {
               }
             </select>
           </label>
-          {/* <label htmlFor="reg_no">Registration No.:
-            <input type="text" id="reg_no" value="AU/YYYY/****" disabled />
-          </label>
-          <label htmlFor="roll_no">Roll No.:
-            <input type="text" id="roll_no" value={"UG/COURSE/YYYY/****"} disabled />
-          </label> */}
         </div>
         <button type="submit" className="bg-blue-500 hover:bg-blue-600 text-white py-3 px-7 rounded-3xl">Create</button>
       </form>

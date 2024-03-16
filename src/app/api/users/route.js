@@ -1,6 +1,6 @@
 import connectMongoDB from "@/libs/mongodb";
-import Users from "@/models/users";
 import { NextResponse } from "next/server";
+import Users from "@/models/users";
 
 export async function GET(request) {
     const req = request.nextUrl.searchParams;
