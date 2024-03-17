@@ -35,14 +35,14 @@ export default function CoursesPage() {
           </Link>
         </div>
         {!courses.loading && (
-          <div className="w-full mx-auto border rounded p-4">
+          <div className="w-full mx-auto border rounded">
             <DataTable value={courses.data} paginator rows={5} showGridlines tableStyle={{ minWidth: '50rem' }}>
-              <Column field="name" header="Name"></Column>
-              <Column field="code" header="Code"></Column>
-              <Column field="degree" header="Degree"></Column>
-              <Column field="type" header="Type"></Column>
-              <Column field="duration" header="Semester"></Column>
-              {/* <Column field="subjects" header="Subjects"></Column> */}
+              <Column className='border p-2' field="name" header="Name"></Column>
+              <Column className='border p-2' field="code" header="Code"></Column>
+              <Column className='border p-2' field="degree" header="Degree"></Column>
+              <Column className='border p-2' field="type" header="Type"></Column>
+              <Column className='border p-2' field="duration" header="Semester"></Column>
+              <Column className='border p-2' field="subjects" header="Subjects"></Column>
             </DataTable>
           </div>
         )}
