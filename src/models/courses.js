@@ -1,12 +1,12 @@
 import mongoose, { Schema } from "mongoose";
 
 const courseSchema = new Schema({
-    name: { type: String, required: true },
-    code: { type: String, required: true, unique: true },
+    qualification: { type: String, required: true },
     degree: { type: String, required: true },
+    code: { type: String, required: true, unique: true },
     type: { type: String, required: true },
     duration: { type: Number, required: true },
-    subjects: [ { type: Array, required: true, default: [] } ]
+    subjects: [ { type: String, required: true} ]
 }
 );
 

@@ -14,12 +14,12 @@
         @apply text-2xl;
     }
     input[type=text], textarea,input[type=email], input[type=password], input[type=number], input[type=date], input[type=tel], input[type=file]{
-        @apply outline-none dark:bg-slate-800 text-gray-800 dark:text-white placeholder-gray-600 rounded-2xl w-full p-4 text-xl font-light;
+        @apply outline-none dark:bg-slate-800 text-gray-800 dark:text-white placeholder-gray-600 rounded-2xl w-full p-4 text-xl font-bold placeholder:font-extralight;
     }
     label {
-        @apply text-xl font-normal text-gray-500;
+        @apply text-lg text-gray-500;
     }
     select{
-        @apply outline-none appearance-auto bg-slate-50 dark:bg-slate-800 p-4 rounded-2xl w-full;
+        @apply outline-none appearance-auto bg-slate-50 dark:bg-slate-800 p-4 rounded-2xl w-full ;
     }
 }

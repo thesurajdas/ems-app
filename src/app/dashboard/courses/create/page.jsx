@@ -1,62 +1,144 @@
 "use client";
+import toast, { Toaster } from 'react-hot-toast';
 import { useState } from 'react';
-import { LuX } from 'react-icons/lu';
+import { LuPlus, LuX } from 'react-icons/lu';
 export default function CreateCourse() {
-  const [data, setData] = useState([]);
-  const [subjects, setSubjects] = useState([]);
+  const [creating, setCreating] = useState(false);
+  const [data, setData] = useState({
+    qualification: "",
+    degree: "",
+    code: "",
+    type: "",
+    duration: 0,
+    subjects: []
+  });
+  const [allSubjects, setAllSubjects] = useState([]);
   const handleKeyDown = (e) => {
-    if (e.key === 'Enter') {
-      setSubjects([...subjects, e.target.value]);
-      e.target.value = '';
-    }
+    if (e.key !== 'Enter') return;
+    const value = e.target.value;
+    if (!value.trim()) return;
+    setAllSubjects([...allSubjects, e.target.value]);
+    e.target.value = '';
+    setData({ ...data, subjects: allSubjects });
+    console.log(allSubjects)
   }
   const removeSubject = (index) => {
-    setSubjects(subjects.filter((_, i) => i !== index));
+    setAllSubjects(allSubjects.filter((_, i) => i !== index));
+    setData({ ...data, subjects: allSubjects });
+    console.log(allSubjects)
   }
 
-  const createCourse = (e) => {
+  const createCourse = async (e) => {
     e.preventDefault();
-    console.log('Course Created');
+    setCreating(true);
+    const res = await fetch('/api/courses', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    });
+    if (res.ok) {
+      setCreating(false);
+      toast.success('Successfully created!');
+      formReset(e);
+    } else {
+      setCreating(false);
+      toast.error('Something went wrong!');
+    }
   }
+  const formReset = (e) => {
+    e.preventDefault();
+    setData({
+      qualification: "",
+      degree: "",
+      code: "",
+      type: "",
+      duration: 0,
+      subjects: []
+    });
+    setAllSubjects([]);
+  }
+  const degrees = [
+    "B.Tech (Bachelors in Technology)",
+    "M.Tech (Masters in Technology)",
+    "B.E (Bachelors in Engineering)",
+    "M.E (Masters in Engineering)",
+    "B.Arch (Bachelors in Architecture)",
+    "M.Arch (Masters in Architecture)",
+    "BBA (Bachelors in Business Administration)",
+    "MBA (Masters in Business Administration)",
+    "BCA (Bachelors in Computer Application)",
+    "MCA (Masters in Computer Application)",
+    "BDS (Bachelor of Dental Surgery)",
+    "MDS (Master of Dental Surgery)",
+    "MBBS (Bachelor of Medicine, Bachelor of Surgery)",
+    "MD (Doctor of Medicine)",
+    "MS (Master of Surgery)",
+    "B.Pharm (Bachelor of Pharmacy)",
+    "M.Pharm (Master of Pharmacy)",
+    "B.Sc (Bachelor of Science)",
+    "M.Sc (Master of Science)",
+    "B.Com (Bachelor of Commerce)",
+    "M.Com (Master of Commerce)",
+    "B.A (Bachelor of Arts)",
+    "M.A (Master of Arts)",
+    "B.Ed (Bachelor of Education)",
+    "M.Ed (Master of Education)",
+    "BHM (Bachelor of Hotel Management)",
+    "MHM (Master of Hotel Management)",
+    "LLB (Bachelor of Laws)",
+    "LLM (Master of Laws)",
+  ];
 
   return (
     <>
-      {/* <form> */}
-      <div className="container w-full mx-auto grid grid-cols-3 gap-4 rounded py-4">
-        <label htmlFor="type">Degree <span className="text-gray-500">*</span>
-          <select id="course_degree" onChange={(e) => setData(...data, e.target.value)}>
-            <option value="Bachelors">Bachelors</option>
-            <option value="Masters">Masters</option>
-          </select>
-        </label>
-        <label htmlFor="cname">Programme Name <span className="text-gray-500">*</span>
-          <input type="text" id="name" onChange={(e) => setData(...data, e.target.value)} placeholder="Name" />
-        </label>
-        <label htmlFor="ccode">Course Code <span className="text-gray-500">*</span>
-          <input type="text" id="code" onChange={(e) => setData(...data, e.target.value)} placeholder="Course Code" />
-        </label>
-        <label htmlFor="cdegree">Course Degree <span className="text-gray-500">*</span>
-          <input type="text" id="degree" onChange={(e) => setData(...data, e.target.value)} placeholder="Course Degree" />
-        </label>
-        <label htmlFor="ctype">Course Type <span className="text-gray-500">*</span>
-          <input type="text" id="type" onChange={(e) => setData(...data, e.target.value)} placeholder="Course Type" />
-        </label>
-        <label htmlFor="cduration">Course Duration <span className="text-gray-500">*</span>
-          <input type="number" id="duration" onChange={(e) => setData(...data, e.target.value)} placeholder="Course Duration" />
-        </label>
-        <label htmlFor="subjects">Course Subjects <span className="text-gray-500">*</span>
-          <div className="items-center outline-none bg-white dark:bg-slate-800 text-gray-800 dark:text-white placeholder-gray-600 rounded-2xl text-xl p-2 font-light">
-            <div className="flex gap-2">
-              {subjects.map((subject, index) => (
-                <span key={index} className="flex items-center justify-between bg-slate-200 dark:bg-slate-600 rounded-2xl gap-2 cursor-pointer p-2">{subject} <LuX onClick={(e) => removeSubject(index)} className="font-bold bg-slate-400 dark:bg-gray-800 rounded-full p-1" /></span>
+      <form onSubmit={createCourse}>
+        <div className="container w-full mx-auto grid rid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-4 rounded py-4">
+          <label htmlFor="qualification">Qualification <span className="text-gray-500">*</span>
+            <select id="qualification" value={data.qualification} onChange={(e) => setData({ ...data, qualification: e.target.value })} required>
+              <option value="" className='font-extralight'>Select Qualification</option>
+              <option value="Grduation">Grduation</option>
+              <option value="Post Grduation">Post Grduation</option>
+              <option value="PhD">PhD</option>
+            </select>
+          </label>
+          <label htmlFor="degree">Degree <span className="text-gray-500">*</span>
+            <select id="degree" value={data.degree} onChange={(e) => setData({ ...data, degree: e.target.value })} required>
+              <option value="" className='font-extralight'>Select Degree</option>
+              {degrees.sort().map((degree, index) => (
+                <option key={index} value={degree}>{degree}</option>
               ))}
+            </select>
+          </label>
+          <label htmlFor="code">Course Code <span className="text-gray-500">*</span>
+            <input type="text" id="code" value={data.code} onChange={(e) => setData({ ...data, code: e.target.value })} placeholder="Code" autoComplete='off' required />
+          </label>
+          <label htmlFor="course_type">Degree Type <span className="text-gray-500">*</span>
+            <select id="course_type" value={data.type} onChange={(e) => setData({ ...data, type: e.target.value })} required>
+              <option value="" className='font-extralight'>Select Type</option>
+              <option value="Regular">Regular</option>
+              <option value="Distance">Distance</option>
+            </select>
+          </label>
+          <label htmlFor="duration">Course Duration (Semester) <span className="text-gray-500">*</span>
+            <input type="number" id="duration" value={data.duration} onChange={(e) => setData({ ...data, duration: e.target.value })} placeholder="Semester" required />
+          </label>
+          <label htmlFor="subjects">Course Subjects <span className="text-gray-500">*</span>
+            <div className="items-center outline-none bg-white dark:bg-slate-800 text-gray-800 dark:text-white placeholder-gray-600 rounded-2xl text-xl p-2 font-light">
+              <div className="container flex flex-wrap gap-2">
+                {allSubjects.map((subject, index) => (
+                  <span key={index} className="flex items-center justify-between bg-slate-200 dark:bg-slate-600 rounded-full gap-2 p-2">{subject} <LuX onClick={(e) => removeSubject(index)} className="cursor-pointer font-bold text-red-500 bg-slate-300 dark:bg-gray-700 rounded-full p-1" /></span>
+                ))}
+              </div>
+              <input type="text" id="subjects" onKeyDown={handleKeyDown} onFocus={(e) => setCreating(true)} onBlur={(e) => setCreating(false)} className='bg-slate-100' placeholder="Add Subjects->" required={!allSubjects.length} />
             </div>
-            <input type="text" id="subjects" onKeyDown={handleKeyDown} placeholder="Subjects" />
-          </div>
-        </label>
-      </div>
-      <button type="button" onClick={createCourse} className="bg-blue-500 hover:bg-blue-600 text-white py-3 px-7 rounded-3xl">Create</button>
-      {/* </form> */}
+          </label>
+        </div>
+        <Toaster />
+        <div className='flex gap-2'>
+          <button type='submit' className="bg-blue-500 hover:bg-blue-600 text-white py-3 px-7 rounded-3xl disabled:bg-blue-400" disabled={creating}>Create</button>
+          <button type='button' onClick={formReset} className="bg-gray-500 hover:bg-gray-600 text-white py-3 px-7 rounded-3xl disabled:bg-gray-400">Reset</button>
+        </div>
+      </form>
     </>
   )
 }
