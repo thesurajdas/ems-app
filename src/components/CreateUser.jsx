@@ -1,9 +1,8 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function CreateUser() {
-  // const year = new Date().getFullYear();
-  const courses = ["B.Tech", "M.Tech", "MBA", "BCA", "MCA", "BBA", "B.Com", "M.Com", "B.Sc", "M.Sc"];
+  const [courses, setCourses] = useState();
   const [data, setData] = useState({});
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -13,9 +12,15 @@ export default function CreateUser() {
   const [gender, setGender] = useState("male");
   const [dob, setDob] = useState();
   const [course, setCourse] = useState("");
-  const handleStatus = (e) => {
-    setStatus(e.target.value);
-  }
+  useEffect(() => {
+    const getCourses = async () => {
+      const res = await fetch("http://localhost:3000/api/courses", { cache: 'no-store' });
+      const datac = await res.json();
+      console.log(datac)
+      setCourses(datac.courses);
+    }
+    getCourses();
+  }, []);
   const createUser = async (e) => {
     e.preventDefault();
     setData({ name, email, mobile, role, status, gender, dob });
@@ -47,9 +52,9 @@ export default function CreateUser() {
           </label>
           <label htmlFor="password">Status <span className="text-gray-500">*</span>
             <div className="flex gap-5 items-center w-full justify-center mt-4">
-              <input type="radio" id="active" name="status" value="active" onChange={handleStatus} />
+              <input type="radio" id="active" name="status" value="active" onChange={(e) => setStatus(e.target.value)} />
               <label htmlFor="active">Active</label>
-              <input type="radio" id="inactive" name="status" value="inactive" onChange={handleStatus} />
+              <input type="radio" id="inactive" name="status" value="inactive" onChange={(e) => setStatus(e.target.value)} />
               <label htmlFor="inactive">Inactive</label>
             </div>
           </label>
@@ -78,10 +83,9 @@ export default function CreateUser() {
           </label>
           <label htmlFor="course">Course <span className="text-gray-500">*</span>
             <select id="course" value={course} onChange={(e) => setCourse(e.target.value)}>
-              {courses.map((course, index) => (
-                <option key={index} value={course}>{course}</option>
-              ))
-              }
+              {courses && courses.map((course, i) => (
+                <option key={i} value={course.code}>{course.code}</option>
+              ))}
             </select>
           </label>
         </div>

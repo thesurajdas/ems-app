@@ -1,25 +1,25 @@
 "use client";
 import toast, { Toaster } from 'react-hot-toast';
 import { useState } from 'react';
-import { LuPlus, LuX } from 'react-icons/lu';
+import { LuX } from 'react-icons/lu';
 export default function CreateCourse() {
   const [creating, setCreating] = useState(false);
+  const [subject, setSubject] = useState('');
+  const [allSubjects, setAllSubjects] = useState([]);
   const [data, setData] = useState({
     qualification: "",
     degree: "",
     code: "",
     type: "",
-    duration: 0,
+    duration: "",
     subjects: []
   });
-  const [allSubjects, setAllSubjects] = useState([]);
-  const handleKeyDown = (e) => {
-    if (e.key !== 'Enter') return;
-    const value = e.target.value;
-    if (!value.trim()) return;
-    setAllSubjects([...allSubjects, e.target.value]);
-    e.target.value = '';
+  const handleKeyDown = () => {
+    if (!subject.trim()) return;
+    setAllSubjects([...allSubjects, subject]);
+    setSubject('');
     setData({ ...data, subjects: allSubjects });
+    //*Bug: All Subjects not set properly
     console.log(allSubjects)
   }
   const removeSubject = (index) => {
@@ -129,7 +129,7 @@ export default function CreateCourse() {
                   <span key={index} className="flex items-center justify-between bg-slate-200 dark:bg-slate-600 rounded-full gap-2 p-2">{subject} <LuX onClick={(e) => removeSubject(index)} className="cursor-pointer font-bold text-red-500 bg-slate-300 dark:bg-gray-700 rounded-full p-1" /></span>
                 ))}
               </div>
-              <input type="text" id="subjects" onKeyDown={handleKeyDown} onFocus={(e) => setCreating(true)} onBlur={(e) => setCreating(false)} className='bg-slate-100' placeholder="Add Subjects->" required={!allSubjects.length} />
+              <input type="text" id="subjects" onChange={(e) => setSubject(e.target.value)} value={subject} onKeyDown={(e) => (e.key == 'Enter') ? handleKeyDown(e) : null} onFocus={(e) => setCreating(true)} onBlur={(e) => setCreating(false)} className='bg-slate-100' placeholder="Add Subjects->" required={!allSubjects.length} />
             </div>
           </label>
         </div>

@@ -37,7 +37,7 @@ export default function Table() {
                                         <tr>
                                             <th scope="col" className="py-3.5 px-4 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
                                                 <div className="flex items-center gap-x-3">
-                                                    <input type="checkbox" className="text-blue-500 border-gray-300 rounded dark:bg-gray-900 dark:ring-offset-gray-900 dark:border-gray-700" />
+                                                    {/* <input type="checkbox" className="text-blue-500 border-gray-300 rounded dark:bg-gray-900 dark:ring-offset-gray-900 dark:border-gray-700" /> */}
                                                     <button className="flex items-center gap-x-2">
                                                         <span>Reg ID</span>
                                                         <LuFilter />
