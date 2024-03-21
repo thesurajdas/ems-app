@@ -1,44 +1,38 @@
 "use client";
 import toast, { Toaster } from 'react-hot-toast';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { LuX } from 'react-icons/lu';
 export default function CreateCourse() {
   const [creating, setCreating] = useState(false);
-  const [subject, setSubject] = useState('');
-  const [allSubjects, setAllSubjects] = useState([]);
+  const [subjects, setSubjects] = useState([]);
+  const [tag, setTag] = useState("");
   const [data, setData] = useState({
     qualification: "",
     degree: "",
     code: "",
     type: "",
-    duration: "",
-    subjects: []
+    duration: ""
   });
   const handleKeyDown = () => {
-    if (!subject.trim()) return;
-    setAllSubjects([...allSubjects, subject]);
-    setSubject('');
-    setData({ ...data, subjects: allSubjects });
-    //*Bug: All Subjects not set properly
-    console.log(allSubjects)
+    if (!tag.trim()) return;
+    setSubjects([...subjects, tag]);
+    setTag("");
   }
   const removeSubject = (index) => {
-    setAllSubjects(allSubjects.filter((_, i) => i !== index));
-    setData({ ...data, subjects: allSubjects });
-    console.log(allSubjects)
+    setSubjects(subjects.filter((_, i) => i !== index));
   }
-
   const createCourse = async (e) => {
     e.preventDefault();
     setCreating(true);
     const res = await fetch('/api/courses', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data)
+      body: JSON.stringify({ ...data, subjects })
     });
     if (res.ok) {
       setCreating(false);
       toast.success('Successfully created!');
+      console.log({ ...data, subjects })
       formReset(e);
     } else {
       setCreating(false);
@@ -125,13 +119,18 @@ export default function CreateCourse() {
           <label htmlFor="subjects">Course Subjects <span className="text-gray-500">*</span>
             <div className="items-center outline-none bg-white dark:bg-slate-800 text-gray-800 dark:text-white placeholder-gray-600 rounded-2xl text-xl p-2 font-light">
               <div className="container flex flex-wrap gap-2">
-                {allSubjects.map((subject, index) => (
+                {subjects.map((subject, index) => (
                   <span key={index} className="flex items-center justify-between bg-slate-200 dark:bg-slate-600 rounded-full gap-2 p-2">{subject} <LuX onClick={(e) => removeSubject(index)} className="cursor-pointer font-bold text-red-500 bg-slate-300 dark:bg-gray-700 rounded-full p-1" /></span>
                 ))}
               </div>
-              <input type="text" id="subjects" onChange={(e) => setSubject(e.target.value)} value={subject} onKeyDown={(e) => (e.key == 'Enter') ? handleKeyDown(e) : null} onFocus={(e) => setCreating(true)} onBlur={(e) => setCreating(false)} className='bg-slate-100' placeholder="Add Subjects->" required={!allSubjects.length} />
+              <input type="text" id="subjects" onChange={(e) => setTag(e.target.value)} value={tag} onKeyDown={(e) => (e.key == 'Enter') ? handleKeyDown(e) : null} onFocus={(e) => setCreating(true)} onBlur={(e) => setCreating(false)} className='bg-slate-100' placeholder="Add Subjects->" required={!subjects.length} />
             </div>
           </label>
+          {
+            useEffect(() => {
+              console.log(subjects)
+            }, [subjects])
+          }
         </div>
         <Toaster />
         <div className='flex gap-2'>
