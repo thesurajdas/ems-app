@@ -46,10 +46,9 @@ export default function CreateCourse() {
       degree: "",
       code: "",
       type: "",
-      duration: 0,
-      subjects: []
+      duration: "",
     });
-    setAllSubjects([]);
+    setSubjects([]);
   }
   const degrees = [
     "B.Tech (Bachelors in Technology)",
