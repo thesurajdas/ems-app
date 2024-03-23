@@ -29,13 +29,12 @@ export default function ViewProfile({ id }) {
                     </h1>
                     <p className="text-2xl font-light">Email: {profile.email}</p>
                     <p className="text-2xl font-light items-center">Status: <UserStatus data={profile.status} /></p>
-                    <p className="text-2xl font-light">Registration Number: {profile.role}</p>
-                    <p className="text-2xl font-light">Registration Number: {profile.reg_no}</p>
-                    <p className="text-2xl font-light">Roll Number: {profile.roll_no}</p>
-                    <p className="text-2xl font-light">Mobile Number: {profile.mobile_no}</p>
+                    <p className="text-2xl font-light">User Role: {profile.role}</p>
+                    <p className="text-2xl font-light">Registration Number: {profile._id}</p>
+                    <p className="text-2xl font-light">Mobile Number: {profile.mobile}</p>
                     <p className="text-2xl font-light">Gender: {profile.gender}</p>
-                    <p className="text-2xl font-light">Date of Birth: {profile.date_of_birth}</p>
-                    <p className="text-2xl font-light">Address: {profile.address.state + ", " + profile.address.country}</p>
+                    <p className="text-2xl font-light">Date of Birth: {profile.dob}</p>
+                    <p className="text-2xl font-light">Address: {profile.street + ", " + profile.state + ", " + profile.country}</p>
                 </div>
             )
             }

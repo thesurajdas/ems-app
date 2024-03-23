@@ -9,6 +9,7 @@ const examSchema = new Schema({
     courses: { type: Array, required: true },
     start_date: { type: Date, required: true },
     end_date: { type: Date, required: true },
+    marks_per_subject: { type: Number, required: true },
     result_id: { type: mongoose.Schema.Types.ObjectId, ref: "Results" },
 },
     {
