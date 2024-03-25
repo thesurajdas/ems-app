@@ -6,12 +6,19 @@ import { UserStatus } from "./TableRow";
 export default function ViewProfile({ id }) {
     const [profile, setProfile] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [course, setCourse] = useState([]);
+    const getCourse = async (id) => {
+        const response = await fetch(`/api/courses/${id}`, { cache: 'no-store' })
+        const data = await response.json()
+        setCourse(data.course.degree)
+    }
     useEffect(() => {
         const getUser = async (id) => {
             const response = await fetch(`/api/users/${id}`, { cache: 'no-store' })
             const data = await response.json()
             setProfile(data.user)
             setLoading(true)
+            getCourse(data.user.course);
         }
         getUser(id);
     }, [id])
@@ -27,14 +34,15 @@ export default function ViewProfile({ id }) {
                         <Image src={"/" + profile.avatar} alt={profile.name} width={50} height={50} className="rounded-full mr-3" />
                         {profile.name}
                     </h1>
-                    <p className="text-2xl font-light">Email: {profile.email}</p>
-                    <p className="text-2xl font-light items-center">Status: <UserStatus data={profile.status} /></p>
-                    <p className="text-2xl font-light">User Role: {profile.role}</p>
-                    <p className="text-2xl font-light">Registration Number: {profile._id}</p>
-                    <p className="text-2xl font-light">Mobile Number: {profile.mobile}</p>
-                    <p className="text-2xl font-light">Gender: {profile.gender}</p>
-                    <p className="text-2xl font-light">Date of Birth: {profile.dob}</p>
-                    <p className="text-2xl font-light">Address: {profile.street + ", " + profile.state + ", " + profile.country}</p>
+                    <h2 className="text-3xl">Course: {course}</h2>
+                    <div className="text-2xl font-light">Email: {profile.email}</div>
+                    <div className="text-2xl font-light items-center">Status: <UserStatus data={profile.status} /></div>
+                    <div className="text-2xl font-light">User Role: {profile.role}</div>
+                    <div className="text-2xl font-light">Registration Number: {profile._id}</div>
+                    <div className="text-2xl font-light">Mobile Number: {profile.mobile}</div>
+                    <div className="text-2xl font-light">Gender: {profile.gender}</div>
+                    <div className="text-2xl font-light">Date of Birth: {profile.dob}</div>
+                    <div className="text-2xl font-light">Address: {profile.street + ", " + profile.state + ", " + profile.country}</div>
                 </div>
             )
             }
