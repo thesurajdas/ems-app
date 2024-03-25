@@ -7,6 +7,7 @@ export default function Exams() {
     const [data, setData] = useState({
         name: "",
         mode: "",
+        location: "",
         duration: "",
         status: "",
         start_date: "",
@@ -63,6 +64,9 @@ export default function Exams() {
                                 <option value="online">Online</option>
                                 <option value="offline">Offline</option>
                             </select>
+                        </label>
+                        <label htmlFor="location">Exam Location <span className="text-gray-500">*</span>
+                            <input type="text" id="location" name="location" placeholder="Exam Location" value={data.location} onChange={(e) => setData({ ...data, location: e.target.value })} required />
                         </label>
                         <label htmlFor="duration">Duration (Hours) <span className="text-gray-500">*</span>
                             <input type="number" id="duration" name="duration" placeholder="Exam Duration" value={data.duration} onChange={(e) => setData({ ...data, duration: e.target.value })} required />

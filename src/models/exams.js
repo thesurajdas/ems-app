@@ -5,6 +5,7 @@ const examSchema = new Schema({
     mode: { type: String, required: true },
     duration: { type: String, required: true },
     status: { type: String, required: true, default: "active" },
+    location: { type: String, required: true },
     courses: { type: Array },
     start_date: { type: Date, required: true },
     end_date: { type: Date, required: true },
