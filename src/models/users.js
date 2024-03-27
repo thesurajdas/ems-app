@@ -3,6 +3,7 @@ import mongoose, { Schema } from "mongoose";
 const usersSchema = new Schema(
     {
         name: { type: String, required: true },
+        roll_no: { type: String, required: true },
         email: { type: String, required: true, lowercase: true },
         password: { type: String, required: true },
         role: { type: String, required: true, default: "student" },
@@ -13,8 +14,10 @@ const usersSchema = new Schema(
         street: { type: String, required: true },
         state: { type: String, required: true },
         country: { type: String, required: true },
-        course: { type: mongoose.Schema.Types.ObjectId, ref: "Courses" },
         avatar: { type: String, required: true, default: "avatar.jpg" },
+        session: { type: String, required: true },
+        course: { type: mongoose.Schema.Types.ObjectId, ref: "Courses" },
+        semester: { type: Number, required: true },
     },
     {
         timestamps: true,

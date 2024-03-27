@@ -1,12 +1,13 @@
 "use client";
-import { get } from "mongoose";
 import { useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 
 export default function CreateUser() {
   const year = new Date().getFullYear();
+  const [semester, setSemester] = useState(0);
   const [data, setData] = useState({
     name: "",
+    roll_no: "",
     email: "",
     password: "",
     mobile: "",
@@ -15,11 +16,17 @@ export default function CreateUser() {
     gender: "",
     dob: "",
     course: "",
+    session: "",
+    semester: "",
     street: "",
     state: "",
     country: "",
   });
-  const [courses, setCourses] = useState();
+  const getRoll = () => {
+    const roll = "AU/" + year + "/" + Math.floor(Math.random() * 10000);
+    return roll;
+  }
+  const [courses, setCourses] = useState([]);
   useEffect(() => {
     const getCourses = async () => {
       const res = await fetch("http://localhost:3000/api/courses", { cache: 'no-store' });
@@ -27,7 +34,17 @@ export default function CreateUser() {
       setCourses(datac.courses);
     }
     getCourses();
+    setData({ ...data, roll_no: getRoll() });
   }, []);
+
+  useEffect(() => {
+    courses.map((course) => {
+      if (course._id === data.course) {
+        setSemester(course.duration);
+      }
+    });
+    console.log(semester)
+  }, [data.course]);
   const createUser = async (e) => {
     e.preventDefault();
     const res = await fetch("http://localhost:3000/api/users", {
@@ -47,6 +64,7 @@ export default function CreateUser() {
   const resetForm = () => {
     setData({
       name: "",
+      roll_no: getRoll(),
       email: "",
       password: "",
       mobile: "",
@@ -55,6 +73,8 @@ export default function CreateUser() {
       gender: "",
       dob: "",
       course: "",
+      session: "",
+      semester: "",
       street: "",
       state: "",
       country: "",
@@ -66,6 +86,9 @@ export default function CreateUser() {
         <h1>Create Teacher/ Student</h1>
         <form onSubmit={createUser} method="POST" encType="multipart/form-data">
           <div className="container w-full mx-auto grid grid-cols-3 gap-4 rounded py-4">
+            <label htmlFor="roll_no">Roll No. <span className="text-gray-500">*</span>
+              <input type="text" id="roll_no" value={data.roll_no} placeholder="Loading..." required readOnly />
+            </label>
             <label htmlFor="name">Name <span className="text-gray-500">*</span>
               <input type="text" id="name" value={data.name} onChange={(e) => setData({ ...data, name: e.target.value })} placeholder="Name" required />
             </label>
@@ -122,6 +145,17 @@ export default function CreateUser() {
                 <option value="">Select Course</option>
                 {courses && courses.map((course, i) => (
                   <option key={i} value={course._id}>{course.code}</option>
+                ))}
+              </select>
+            </label>
+            <label htmlFor="session">Session Year <span className="text-gray-500">*</span>
+              <input type="number" id="session" value={data.session} placeholder="Session" onChange={(e) => setData({ ...data, session: e.target.value })} required />
+            </label>
+            <label htmlFor="semester">Semester <span className="text-gray-500">*</span>
+              <select id="semester" value={data.semester} onChange={(e) => setData({ ...data, semester: e.target.value })} disabled={data.course === ""} required>
+                <option value="">Select Semester</option>
+                {semester && [...Array(semester)].map((_, i) => (
+                  <option key={i} value={i + 1}>{i + 1}</option>
                 ))}
               </select>
             </label>

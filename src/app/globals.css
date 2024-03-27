@@ -14,12 +14,15 @@
         @apply text-2xl;
     }
     input[type=text], textarea,input[type=email], input[type=password], input[type=number], input[type=date], input[type=tel], input[type=file]{
-        @apply outline-none dark:bg-slate-800 text-gray-800 dark:text-white placeholder-gray-600 rounded-2xl w-full p-4 text-xl font-bold placeholder:font-extralight disabled:text-slate-500;
+        @apply outline-none dark:bg-slate-800 text-gray-800 dark:text-white bg-gray-200 rounded-2xl w-full p-4 text-xl font-bold placeholder:font-extralight disabled:text-slate-500 read-only:text-slate-500;
     }
     label {
         @apply text-lg text-gray-500;
     }
     select{
-        @apply outline-none appearance-auto bg-slate-50 dark:bg-slate-800 p-4 rounded-2xl w-full ;
+        @apply outline-none appearance-auto bg-slate-50 dark:bg-slate-800 p-4 rounded-2xl w-full disabled:text-slate-500 read-only:text-slate-500;
+    }
+    td, th {
+        @apply border border-slate-900 dark:border-slate-100 px-4 py-2;
     }
 }

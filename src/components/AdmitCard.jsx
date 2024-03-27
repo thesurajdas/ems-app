@@ -39,12 +39,16 @@ export default function AdmitCard() {
                             <p>123456</p>
                         </div>
                         <div className="mb-8">
-                            <p className="font-bold">Exam Center:</p>
-                            <p>1234 Exam Street, Cityville</p>
+                            <p className="font-bold">Degree:</p>
+                            <p>Bachelor of Science</p>
                         </div>
                         <div className="mb-8">
-                            <p className="font-bold">Reporting Time:</p>
-                            <p>9:00 AM</p>
+                            <p className="font-bold">Semester:</p>
+                            <p>3rd Semester</p>
+                        </div>
+                        <div className="mb-8">
+                            <p className="font-bold">Exam Center:</p>
+                            <p>1234 Exam Street, Cityville</p>
                         </div>
                         <div className="mb-8">
                             <p className="font-bold">Instructions:</p>
@@ -61,14 +65,61 @@ export default function AdmitCard() {
                             <Image src="/avatar.jpg" alt="Candidate" width={150} height={150} className="rounded-2xl mx-auto" />
                         </div>
                         <div className="mb-8">
-                            <p className="font-bold">Subjects:</p>
-                            <ul className="list-disc pl-5">
-                                <li>Mathematics - April 1, 2024 - 10:00 AM</li>
-                                <li>Science - April 1, 2024 - 12:00 PM</li>
-                                <li>English - April 1, 2024 - 2:00 PM</li>
-                                <li>Social Studies - April 1, 2024 - 4:00 PM</li>
-                                <li>General Knowledge - April 1, 2024 - 6:00 PM</li>
-                            </ul>
+                            <p className="font-bold mb-2">Paper Details:</p>
+                            <table className="table-auto">
+                                <thead>
+                                    <tr>
+                                        <th>No.</th>
+                                        <th>Paper Name</th>
+                                        <th>Date</th>
+                                        <th>Time</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Mathematics</td>
+                                        <td>April 1, 2024</td>
+                                        <td>10:00 AM</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>Science</td>
+                                        <td>April 1, 2024</td>
+                                        <td>12:00 PM</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>English</td>
+                                        <td>April 1, 2024</td>
+                                        <td>2:00 PM</td>
+                                    </tr>
+                                    <tr>
+                                        <td>4</td>
+                                        <td>Social Studies</td>
+                                        <td>April 1, 2024</td>
+                                        <td>4:00 PM</td>
+                                    </tr>
+                                    <tr>
+                                        <td>5</td>
+                                        <td>General Knowledge</td>
+                                        <td>April 1, 2024</td>
+                                        <td>6:00 PM</td>
+                                    </tr>
+                                    <tr>
+                                        <td>6</td>
+                                        <td>Computer Science</td>
+                                        <td>April 1, 2024</td>
+                                        <td>8:00 PM</td>
+                                    </tr>
+                                    <tr>
+                                        <td>7</td>
+                                        <td>Physics</td>
+                                        <td>April 1, 2024</td>
+                                        <td>10:00 PM</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>

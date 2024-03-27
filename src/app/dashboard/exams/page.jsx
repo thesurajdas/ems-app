@@ -78,14 +78,6 @@ export default function Exams() {
                                 <option value="inactive">Inactive</option>
                             </select>
                         </label>
-                        {/* <label htmlFor="courses">Courses <span className="text-gray-500">*</span>
-                        <select id="courses" name="courses" required>
-                            <option value="">Select Course</option>
-                            {courses && courses.map((course, index) => (
-                                <option key={index} value={course.id}>{course.code}</option>
-                            ))}
-                        </select>
-                    </label> */}
                         <label htmlFor="start_date">Start Date <span className="text-gray-500">*</span>
                             <input type="date" id="start_date" name="start_date" value={data.start_date} onChange={(e) => setData({ ...data, start_date: e.target.value })} required />
                         </label>
