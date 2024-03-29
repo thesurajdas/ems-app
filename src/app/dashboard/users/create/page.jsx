@@ -148,9 +148,6 @@ export default function CreateUser() {
                 ))}
               </select>
             </label>
-            <label htmlFor="session">Session Year <span className="text-gray-500">*</span>
-              <input type="number" id="session" value={data.session} placeholder="Session" onChange={(e) => setData({ ...data, session: e.target.value })} required />
-            </label>
             <label htmlFor="semester">Semester <span className="text-gray-500">*</span>
               <select id="semester" value={data.semester} onChange={(e) => setData({ ...data, semester: e.target.value })} disabled={data.course === ""} required>
                 <option value="">Select Semester</option>
@@ -158,6 +155,9 @@ export default function CreateUser() {
                   <option key={i} value={i + 1}>{i + 1}</option>
                 ))}
               </select>
+            </label>
+            <label htmlFor="session">Session Year <span className="text-gray-500">*</span>
+              <input type="number" id="session" value={data.session} placeholder="Session" onChange={(e) => setData({ ...data, session: e.target.value })} required />
             </label>
           </div>
           <Toaster />

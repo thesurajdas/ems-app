@@ -22,7 +22,7 @@ const SideBar = () => {
     ];
 
     return (
-        <div className="bg-slate-200 dark:bg-gray-800 w-0 md:w-64 h-screen overflow-auto">
+        <div className="bg-slate-200 dark:bg-gray-800 h-screen overflow-auto">
             <h2 className="p-4 text-center">EM System</h2>
             <ul className="p-6">
                 {links.map((link, index) => (

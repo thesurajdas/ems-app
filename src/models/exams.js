@@ -3,8 +3,7 @@ import mongoose, { Schema } from "mongoose";
 const examSchema = new Schema({
     name: { type: String, required: true },
     mode: { type: String, required: true },
-    duration: { type: String, required: true },
-    status: { type: String, required: true, default: "active" },
+    status: { type: String, required: true },
     location: { type: String, required: true },
     result_status: { type: String, required: true, default: "pending" },
     course_id: { type: mongoose.Schema.Types.ObjectId, ref: "Courses" },
