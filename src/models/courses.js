@@ -7,8 +7,7 @@ const courseSchema = new Schema({
     type: { type: String, required: true },
     duration: { type: Number, required: true },
     subjects: [ { type: String, required: true} ]
-}
-);
+});
 
 const Courses = mongoose.models.Courses || mongoose.model("Courses", courseSchema);
 
