@@ -9,7 +9,8 @@ export default function CreateResultPage() {
         exam_id: '',
         student_id: '',
         course_id: '',
-        semester: ""
+        semester: "",
+        session: ''
     });
     const [subjectData, setSubjectData] = useState([]);
     useEffect(() => {
@@ -61,7 +62,8 @@ export default function CreateResultPage() {
                 student_id: '',
                 exam_id: '',
                 course_id: '',
-                semester: ''
+                semester: '',
+                session: ''
             });
             setSubjectData([]);
         } catch (error) {
@@ -79,7 +81,7 @@ export default function CreateResultPage() {
                 <div className="grid grid-cols-3 gap-4">
                     <label htmlFor="exam_id">Exam ID <span className="text-gray-500">*</span>
                         <select id="exam_id" name="exam_id" value={formData.exam_id} onChange={(e) => {
-                            setFormData({ ...formData, exam_id: e.target.value, course_id: exams.find(exam => exam._id === e.target.value).course_id, semester: exams.find(exam => exam._id === e.target.value).semester })
+                            setFormData({ ...formData, exam_id: e.target.value, course_id: exams.find(exam => exam._id === e.target.value).course_id, semester: exams.find(exam => exam._id === e.target.value).semester, session: exams.find(exam => exam._id === e.target.value).session })
                             setSubjectData(exams.find(exam => exam._id === e.target.value).subject_details.map((subject) => ({
                                 subject_name: subject.subject_name,
                                 total_marks: subject.total_marks,
@@ -101,6 +103,19 @@ export default function CreateResultPage() {
                             ))}
                         </select>
                     </label>
+                    {formData.semester && (
+                        <label htmlFor="session">Session (Year) <span className="text-gray-500">*</span>
+                            <input
+                                type="number"
+                                id="session"
+                                name="session"
+                                value={formData.session}
+                                onChange={(e) => setFormData({ ...formData, session: e.target.value })}
+                                required
+                                readOnly
+                            />
+                        </label>
+                    )}
                     {formData.semester && (
                         <label htmlFor="semester">Semester <span className="text-gray-500">*</span>
                             <input

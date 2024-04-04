@@ -2,17 +2,20 @@ import connectMongoDB from "@/libs/mongodb";
 import Results from "@/models/results";
 import { NextResponse } from "next/server";
 
-export async function GET(request) {
-    const student_id = request.nextUrl.searchParams.get("student") || "";
-    const course_id = request.nextUrl.searchParams.get("course") || "";
-    const semester = request.nextUrl.searchParams.get("semester") || "";
-    if (course_id && semester) {
-        await connectMongoDB();
-        const results = await Results.find({ course_id, semester, student_id });
-        return NextResponse.json({ results }, { status: 200 });
-    }
+
+ export async function GET(request) {
+    const student_id = request.nextUrl.searchParams.get("student_id");
+    const course_id = request.nextUrl.searchParams.get("course_id");
+    const semester = Number(request.nextUrl.searchParams.get("semester"));
+
     await connectMongoDB();
-    const results = await Results.find();
+
+    let query = {};
+    if (student_id) query.student_id = student_id;
+    if (course_id) query.course_id = course_id;
+    if (semester) query.semester = semester;
+
+    const results = await Results.find(query);
     return NextResponse.json({ results }, { status: 200 });
 }
 export async function POST(request) {

@@ -23,6 +23,7 @@ const ExamCard = ({ exam }) => {
             <p>Location: {exam.location}</p>
             <p>Result Status: {exam.result_status}</p>
             <p>Semester: {exam.semester}</p>
+            <p>Session: {exam.session}</p>
             <button
                 className="mt-2 bg-blue-500 hover:bg-blue-600 text-white py-1 px-2 rounded"
                 onClick={toggleDetails}

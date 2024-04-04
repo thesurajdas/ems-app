@@ -5,6 +5,7 @@ const resultSchema = new Schema({
     course_id: { type: mongoose.Schema.Types.ObjectId, ref: "Courses", required: true },
     semester: { type: Number, required: true },
     student_id: { type: mongoose.Schema.Types.ObjectId, ref: "Users", required: true },
+    session: { type: Number, required: true },
     marks: [{
         subject_name: { type: String, required: true },
         total_marks: { type: Number, required: true, min: 0, max: 100 },

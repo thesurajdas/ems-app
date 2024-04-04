@@ -13,7 +13,7 @@
     h2 {
         @apply text-2xl;
     }
-    input{
+    input, textarea{
         @apply outline-none dark:bg-slate-800 text-gray-800 dark:text-white bg-gray-200 rounded-2xl w-full p-4 text-xl font-bold placeholder:font-extralight disabled:text-slate-500 read-only:text-slate-500;
     }
     label {

@@ -14,6 +14,7 @@ export default function Exams() {
         status: "",
         course_id: "",
         semester: "",
+        session: "",
         result_status: "",
     });
     const resetForm = () => {
@@ -24,6 +25,7 @@ export default function Exams() {
             status: "",
             course_id: "",
             semester: "",
+            session: "",
             result_status: "",
         });
     }
@@ -108,6 +110,9 @@ export default function Exams() {
                                 <option key={i} value={i + 1}>{i + 1}</option>
                             ))}
                         </select>
+                    </label>
+                    <label htmlFor="session">Session <span className="text-gray-500">*</span>
+                        <input type="number" id="session" name="session" placeholder="Session" value={data.session} onChange={(e) => setData({ ...data, session: e.target.value })} required />
                     </label>
                 </div>
                 <div className="" hidden={data.semester === ""}>

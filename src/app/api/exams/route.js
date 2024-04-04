@@ -3,15 +3,13 @@ import Exams from "@/models/exams";
 import { NextResponse } from "next/server";
 
 export async function GET(request) {
+    await connectMongoDB();
     const course_id = request.nextUrl.searchParams.get("course");
     const semester = request.nextUrl.searchParams.get("semester");
-    if (course_id && semester) {
-        await connectMongoDB();
-        const exams = await Exams.find({ course_id, semester});
-        return NextResponse.json({ exams }, { status: 200 });
-    }
-    await connectMongoDB();
-    const exams = await Exams.find();
+    const query = {};
+    if (course_id) query.course_id = course_id;
+    if (semester) query.semester = semester;
+    const exams = await Exams.find({query});
     return NextResponse.json({ exams }, { status: 200 });
 }
 export async function POST(request) {
