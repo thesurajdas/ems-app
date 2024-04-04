@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { useEffect } from 'react';
 import { LuDownload } from 'react-icons/lu';
 
-export default function AdmitCard() {
+export default function AdmitCard({ data }) {
     const printAdmitCard = async () => {
         const element = document.getElementById("admit-card");
         const options = {
@@ -16,6 +16,9 @@ export default function AdmitCard() {
         };
         html2pdf().from(element).set(options).save();
     }
+    useEffect(() => {
+        console.log(data)
+    }, [])
     return (
         <>
             <div className="flex items-center justify-between my-4">
@@ -27,8 +30,8 @@ export default function AdmitCard() {
                     <div className="w-1/2 pr-4">
                         <div className="mb-8">
                             <h1 className="text-3xl font-bold mb-4">Admit Card</h1>
-                            <p className="text-gray-500 font-semibold text-lg">Examination: Sample Exam</p>
-                            <p className="text-gray-500 font-extralight">Date: April 1, 2024</p>
+                            <p className="text-gray-500 font-semibold text-lg">Examination: {data.exam_name}</p>
+                            <p className="text-gray-500 font-extralight">Date: {data.exam_start_date}</p>
                         </div>
                         <div className="mb-8">
                             <p className="font-bold">Candidate Name:</p>
@@ -40,15 +43,15 @@ export default function AdmitCard() {
                         </div>
                         <div className="mb-8">
                             <p className="font-bold">Degree:</p>
-                            <p>Bachelor of Science</p>
+                            <p>{data.exam_course}</p>
                         </div>
                         <div className="mb-8">
                             <p className="font-bold">Semester:</p>
-                            <p>3rd Semester</p>
+                            <p>{data.exam_semester}</p>
                         </div>
                         <div className="mb-8">
                             <p className="font-bold">Exam Center:</p>
-                            <p>1234 Exam Street, Cityville</p>
+                            <p>{data.exam_location}</p>
                         </div>
                         <div className="mb-8">
                             <p className="font-bold">Instructions:</p>
@@ -64,7 +67,7 @@ export default function AdmitCard() {
                             <p className="font-bold">Photo:</p>
                             <Image src="/avatar.jpg" alt="Candidate" width={150} height={150} className="rounded-2xl mx-auto" />
                         </div>
-                        <div className="mb-8">
+                        <div className="mb-8 overflow-auto">
                             <p className="font-bold mb-2">Paper Details:</p>
                             <table className="table-auto">
                                 <thead>
@@ -76,48 +79,14 @@ export default function AdmitCard() {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Mathematics</td>
-                                        <td>April 1, 2024</td>
-                                        <td>10:00 AM</td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>Science</td>
-                                        <td>April 1, 2024</td>
-                                        <td>12:00 PM</td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>English</td>
-                                        <td>April 1, 2024</td>
-                                        <td>2:00 PM</td>
-                                    </tr>
-                                    <tr>
-                                        <td>4</td>
-                                        <td>Social Studies</td>
-                                        <td>April 1, 2024</td>
-                                        <td>4:00 PM</td>
-                                    </tr>
-                                    <tr>
-                                        <td>5</td>
-                                        <td>General Knowledge</td>
-                                        <td>April 1, 2024</td>
-                                        <td>6:00 PM</td>
-                                    </tr>
-                                    <tr>
-                                        <td>6</td>
-                                        <td>Computer Science</td>
-                                        <td>April 1, 2024</td>
-                                        <td>8:00 PM</td>
-                                    </tr>
-                                    <tr>
-                                        <td>7</td>
-                                        <td>Physics</td>
-                                        <td>April 1, 2024</td>
-                                        <td>10:00 PM</td>
-                                    </tr>
+                                    {data.exam_subjects.map((subject, index) => (
+                                        <tr key={index}>
+                                            <td>{index + 1}</td>
+                                            <td>{subject.subject_name}</td>
+                                            <td>{subject.exam_date}</td>
+                                            <td>{subject.exam_time}</td>
+                                        </tr>
+                                    ))}
                                 </tbody>
                             </table>
                         </div>

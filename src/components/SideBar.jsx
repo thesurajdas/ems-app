@@ -15,7 +15,7 @@ const SideBar = () => {
         { name: 'Courses', url: '/dashboard/courses', icon: <LuBook /> },
         { name: 'Exams', url: '/dashboard/exams', icon: <LuBookPlus /> },
         { name: 'Admit', url: '/dashboard/admit', icon: <LuFileCheck /> },
-        { name: 'Result', url: '/dashboard/results', icon: <LuFileSpreadsheet /> },
+        { name: 'Result', url: '/dashboard/result', icon: <LuFileSpreadsheet /> },
         { name: 'Result Analysis', url: '/dashboard/analysis', icon: <LuFileBarChart2 /> },
         { name: 'Profile', url: '/dashboard/profile', icon: <LuUser2 /> },
         { name: 'Settings', url: '/dashboard/settings', icon: <LuSettings /> },
