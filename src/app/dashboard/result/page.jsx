@@ -6,16 +6,40 @@ export default function ResultPage() {
     const [results, setResults] = useState();
     const [showResult, setShowResult] = useState(false);
     const [resultsData, setResultsData] = useState({});
-    const handleView = (results) => {
+    const handleView = async (results) => {
+        const res = await fetch(`http://localhost:3000/api/exams?exam=${results.exam_id}`, {
+            method: "GET",
+            headers: { "Content-Type": "application/json" },
+            cache: "no-cache"
+        });
+        const data = await res.json();
+        const res2 = await fetch(`http://localhost:3000/api/courses?id=${data.exam.course_id}`, {
+            method: "GET",
+            headers: { "Content-Type": "application/json" },
+            cache: "no-cache"
+        });
+        const data2 = await res2.json();
+        const total_marks = results.marks.reduce((acc, mark) => acc + mark.total_marks, 0);
+        const obtained_marks = results.marks.reduce((acc, mark) => acc + mark.obtained_marks, 0);
         setResultsData({
-            result_course: results.course_id,
+            ...resultsData,
+            result_course: data2.course.code,
+            exam_name: data.exam.name,
+            exam_session: data.exam.session,
+            exam_mode: data.exam.mode,
             result_semester: results.semester,
+            total_marks: total_marks,
+            obtained_marks: obtained_marks,
             result_marks: results.marks,
         })
         setShowResult(!showResult)
-        console.log(resultsData)
     };
     useEffect(() => {
+        setResultsData({
+            ...resultsData,
+            student_name: "John Doe",
+            student_id: "123456",
+        })
         const course_id = "65fc45581bd9c281c805197f"; //Make it dynamic
         const semester = 1; //Make it dynamic
         const fecthData = async (id) => {
@@ -25,15 +49,16 @@ export default function ResultPage() {
                 cache: "no-cache"
             });
             const data = await res.json();
-            console.log(data.results)
             setResults(data.results);
+            console.log(data.results)
         };
         fecthData(course_id, semester);
     }, []);
+
     return (
         <>
             <h1 className="my-4">Results</h1>
-            <div className="">
+            <div className="overflow-x-auto">
                 <table className="table-auto w-full">
                     <thead>
                         <tr>
@@ -51,7 +76,7 @@ export default function ResultPage() {
                                 <td>{result.course_id}</td>
                                 <td>Semester {result.semester}</td>
                                 <td>{result.session}</td>
-                                <td><button onClick={(e) => handleView(results)} className="bg-yellow-500 hover:bg-yellow-600 py-2 px-4 rounded">{(showResult) ? "Hide" : "View"}</button></td>
+                                <td><button onClick={(e) => handleView(results[index])} className="bg-yellow-500 hover:bg-yellow-600 py-2 px-4 rounded">{(showResult) ? "Hide" : "View"}</button></td>
                             </tr>
                         ))}
                     </tbody>

@@ -4,6 +4,11 @@ import { NextResponse } from "next/server";
 
 export async function GET(request) {
     await connectMongoDB();
+    const id = request.nextUrl.searchParams.get("id");
+    if (id) {
+        const course = await Courses.findById(id);
+        return NextResponse.json({ course }, { status: 200 });
+    }
     const courses = await Courses.find();
     return NextResponse.json({ courses }, { status: 200 });
 }
