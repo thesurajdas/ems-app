@@ -122,7 +122,7 @@ export default function CreateCourse() {
                   <span key={index} className="flex items-center justify-between bg-slate-200 dark:bg-slate-600 rounded-full gap-2 p-2">{subject} <LuX onClick={(e) => removeSubject(index)} className="cursor-pointer font-bold text-red-500 bg-slate-300 dark:bg-gray-700 rounded-full p-1" /></span>
                 ))}
               </div>
-              <input type="text" id="subjects" onChange={(e) => setTag(e.target.value)} value={tag} onKeyDown={(e) => (e.key == 'Enter') ? handleKeyDown(e) : null} onFocus={(e) => setCreating(true)} onBlur={(e) => setCreating(false)} className='bg-slate-100' placeholder="Add Subjects->" required={!subjects.length} />
+              <input type="text" id="subjects" onChange={(e) => setTag(e.target.value)} value={tag} onKeyDown={(e) => (e.key == 'Enter') ? handleKeyDown(e) : null} onFocus={(e) => setCreating(true)} onBlur={(e) => setCreating(false)} placeholder="Add Subjects->" required={!subjects.length} />
             </div>
           </label>
           {

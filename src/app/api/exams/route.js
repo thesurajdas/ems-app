@@ -4,9 +4,9 @@ import { NextResponse } from "next/server";
 
 export async function GET(request) {
     await connectMongoDB();
-    const course_id = request.nextUrl.searchParams.get("course");
+    const course_id = request.nextUrl.searchParams.get("course_id");
     const semester = request.nextUrl.searchParams.get("semester");
-    const exam_id = request.nextUrl.searchParams.get("exam");
+    const exam_id = request.nextUrl.searchParams.get("exam_id");
     if (exam_id) {
         const exam = await Exams.findById(exam_id);
         return NextResponse.json({ exam }, { status: 200 });

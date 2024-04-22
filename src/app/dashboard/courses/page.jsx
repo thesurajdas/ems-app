@@ -47,7 +47,7 @@ export default function CoursesPage() {
         </div>
         {!courses.loading && (
           <div className="w-full mx-auto border rounded">
-            <DataTable value={courses.data} paginator rows={1} showGridlines tableStyle={{ minWidth: '50rem' }}>
+            <DataTable value={courses.data} paginator rows={5} showGridlines tableStyle={{ minWidth: '50rem' }}>
               {cols.map((col, i) => (
                 <Column className='' key={col.field} field={col.field} header={col.header} />
               ))}

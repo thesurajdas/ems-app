@@ -1,13 +1,14 @@
 "use client";
 import { useEffect, useState } from "react";
 import MarkSheet from "@/components/Marksheet";
+import Link from "next/link";
 
 export default function ResultPage() {
     const [results, setResults] = useState();
     const [showResult, setShowResult] = useState(false);
     const [resultsData, setResultsData] = useState({});
     const handleView = async (results) => {
-        const res = await fetch(`http://localhost:3000/api/exams?exam=${results.exam_id}`, {
+        const res = await fetch(`http://localhost:3000/api/exams?exam_id=${results.exam_id}`, {
             method: "GET",
             headers: { "Content-Type": "application/json" },
             cache: "no-cache"
@@ -38,12 +39,11 @@ export default function ResultPage() {
         setResultsData({
             ...resultsData,
             student_name: "John Doe",
-            student_id: "123456",
+            student_id: "65ff480a8ee837317822fb1b",
         })
-        const course_id = "65fc45581bd9c281c805197f"; //Make it dynamic
-        const semester = 1; //Make it dynamic
+        const student_id = "65ff480a8ee837317822fb1b"; //Make it dynamic
         const fecthData = async (id) => {
-            const res = await fetch(`http://localhost:3000/api/results?course_id=${course_id}&semester=${semester}`, {
+            const res = await fetch(`http://localhost:3000/api/results?student_id=${student_id}`, {
                 method: "GET",
                 headers: { "Content-Type": "application/json" },
                 cache: "no-cache"
@@ -52,12 +52,13 @@ export default function ResultPage() {
             setResults(data.results);
             console.log(data.results)
         };
-        fecthData(course_id, semester);
+        fecthData(student_id);
     }, []);
 
     return (
         <>
             <h1 className="my-4">Results</h1>
+            <Link href='http://localhost:3000/dashboard/result/create'><button className="bg-blue-500 hover:bg-blue-600 py-2 px-4 rounded">Add Result</button></Link>
             <div className="overflow-x-auto">
                 <table className="table-auto w-full">
                     <thead>
@@ -76,7 +77,14 @@ export default function ResultPage() {
                                 <td>{result.course_id}</td>
                                 <td>Semester {result.semester}</td>
                                 <td>{result.session}</td>
-                                <td><button onClick={(e) => handleView(results[index])} className="bg-yellow-500 hover:bg-yellow-600 py-2 px-4 rounded">{(showResult) ? "Hide" : "View"}</button></td>
+                                <td><button id={"button" + index} onClick={(e) => {
+                                    handleView(results[index])
+                                    if (document.getElementById("button" + index).textContent === "View") {
+                                        document.getElementById("button" + index).textContent = "Hide"
+                                    } else {
+                                        document.getElementById("button" + index).textContent = "View"
+                                    }
+                                }} className="bg-yellow-500 hover:bg-yellow-600 py-2 px-4 rounded">View</button></td>
                             </tr>
                         ))}
                     </tbody>

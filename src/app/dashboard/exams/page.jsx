@@ -31,7 +31,7 @@ const ExamCard = ({ exam }) => {
                 {showDetails ? 'Hide Details' : 'Show Details'}
             </button>
             {showDetails && (
-                <div className="mt-2 p-2 flex gap-2">
+                <div className="mt-2 p-2 flex gap-2 overflow-auto">
                     {exam.subject_details.map((subject) => (
                         <div className='border p-2 rounded' key={subject.subject_name}>
                             <p>Subject Name: {subject.subject_name}</p>
@@ -73,7 +73,7 @@ export default function ExamsPage() {
                     </button>
                 </Link>
             </div>
-            <div className="container grid grid-cols-2">
+            <div className="container grid grid-cols-2 gap-4">
                 {exams.map((exam) => (
                     <ExamCard key={exam._id} exam={exam} />
                 ))}
