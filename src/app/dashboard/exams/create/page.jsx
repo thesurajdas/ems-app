@@ -16,6 +16,7 @@ export default function Exams() {
         semester: "",
         session: "",
         result_status: "",
+        pass_percent: "",
     });
     const resetForm = () => {
         setData({
@@ -27,6 +28,7 @@ export default function Exams() {
             semester: "",
             session: "",
             result_status: "",
+            pass_percent: "",
         });
     }
 
@@ -113,6 +115,9 @@ export default function Exams() {
                     </label>
                     <label htmlFor="session">Session <span className="text-gray-500">*</span>
                         <input type="number" id="session" name="session" placeholder="Session" value={data.session} onChange={(e) => setData({ ...data, session: e.target.value })} required />
+                    </label>
+                    <label htmlFor="pass_percent">Pass Percent <span className="text-gray-500">*</span>
+                        <input type="number" id="pass_percent" name="pass_percent" placeholder="Pass Percent" value={data.pass_percent} onChange={(e) => setData({ ...data, pass_percent: e.target.value })} required />
                     </label>
                 </div>
                 <div className="" hidden={data.semester === ""}>

@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import html2pdf from 'html2pdf.js';
 import { LuDownload } from 'react-icons/lu';
 import { LiaUniversitySolid } from "react-icons/lia";
-import { set } from "mongoose";
 
 export default function MarkSheet({ data }) {
     const getGrade = (obtained_marks, total_marks) => {
@@ -23,7 +22,7 @@ export default function MarkSheet({ data }) {
         } else if (percentage >= 30) {
             return "D";
         } else {
-            return "F";
+            return <b className="text-red-500">F</b>;
         }
     }
     const printMarkSheet = async () => {
@@ -102,13 +101,14 @@ export default function MarkSheet({ data }) {
                         <tbody>
                             {data.result_marks.map((mark, index) => {
                                 return (
-                                <tr key={index}>
-                                    <td>{mark.subject_name}</td>
-                                    <td>{mark.total_marks}</td>
-                                    <td>{mark.obtained_marks}</td>
-                                    <td>{getGrade(mark.obtained_marks, mark.total_marks)}</td>
-                                </tr>
-                            )})}
+                                    <tr key={index}>
+                                        <td>{mark.subject_name}</td>
+                                        <td>{mark.total_marks}</td>
+                                        <td>{mark.obtained_marks}</td>
+                                        <td>{getGrade(mark.obtained_marks, mark.total_marks)}</td>
+                                    </tr>
+                                )
+                            })}
                         </tbody>
                     </table>
                     <div className="flex items-center justify-end gap-4">
@@ -126,7 +126,11 @@ export default function MarkSheet({ data }) {
                         </div>
                         <div className="flex items-center gap-2">
                             <label>Percentage:</label>
-                            <span>{((data.obtained_marks/data.total_marks)*100).toFixed(2)} %</span>
+                            <span>{((data.obtained_marks / data.total_marks) * 100).toFixed(2)} %</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                            <label>Result:</label>
+                            <span>{(((data.obtained_marks / data.total_marks) * 100).toFixed(2)>data.pass_percent)?"Pass":"Fail"}</span>
                         </div>
                     </div>
                     <div className="flex items-center justify-start gap-4">

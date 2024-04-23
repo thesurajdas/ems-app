@@ -32,6 +32,7 @@ export default function ResultPage() {
             total_marks: total_marks,
             obtained_marks: obtained_marks,
             result_marks: results.marks,
+            pass_percent: data.exam.pass_percent
         })
         setShowResult(!showResult)
     };
@@ -58,7 +59,7 @@ export default function ResultPage() {
     return (
         <>
             <h1 className="my-4">Results</h1>
-            <Link href='http://localhost:3000/dashboard/result/create'><button className="bg-blue-500 hover:bg-blue-600 py-2 px-4 rounded">Add Result</button></Link>
+            <Link href='http://localhost:3000/dashboard/result/create'><button className="bg-blue-500 hover:bg-blue-600 py-2 px-4 rounded my-4">Add Result</button></Link>
             <div className="overflow-x-auto">
                 <table className="table-auto w-full">
                     <thead>

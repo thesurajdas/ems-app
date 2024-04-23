@@ -6,6 +6,8 @@ const resultSchema = new Schema({
     semester: { type: Number, required: true },
     student_id: { type: mongoose.Schema.Types.ObjectId, ref: "Users", required: true },
     session: { type: Number, required: true },
+    result: { type: String, required: true, enum: ["Pass", "Fail"]},
+    percentage: { type: Number, required: true, min: 0, max: 100 },
     marks: [{
         subject_name: { type: String, required: true },
         total_marks: { type: Number, required: true, min: 0, max: 100 },
