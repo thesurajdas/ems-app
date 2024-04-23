@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import AdmitCard from "@/components/AdmitCard";
-import { set } from "mongoose";
+import {dateFormat} from "@/app/hooks/dateformat";
 
 export default function Admit() {
     const [exams, setExams] = useState();
@@ -34,9 +34,10 @@ export default function Admit() {
     };
     useEffect(() => {
         const course_id = "65fc45581bd9c281c805197f"; //Make it dynamic
-        const semester = 4; //Make it dynamic
+        const semester = 2; //Make it dynamic
+        const session = 2023;
         const fecthData = async (id) => {
-            const res = await fetch(`http://localhost:3000/api/exams?course=${course_id}&semester=${semester}`, {
+            const res = await fetch(`http://localhost:3000/api/exams?course=${course_id}&semester=${semester}&session=${session}`, {
                 method: "GET",
                 headers: { "Content-Type": "application/json" },
                 cache: "no-cache"
@@ -67,7 +68,7 @@ export default function Admit() {
                                 <td>{exam.name}</td>
                                 <td>{exam.course_id}</td>
                                 <td>Semester {exam.semester}</td>
-                                <td>{exam.subject_details[0].exam_date}</td>
+                                <td>{dateFormat(exam.subject_details[0].exam_date)}</td>
                                 <td><button onClick={(e) => handleView(exam) } className="bg-yellow-500 hover:bg-yellow-600 py-2 px-4 rounded">{(showAdmit) ? "Hide" : "Show"}</button></td>
                             </tr>
                         ))}

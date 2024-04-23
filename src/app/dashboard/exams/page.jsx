@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { LuFileEdit } from 'react-icons/lu';
+import { convertTime, dateFormat } from '@/app/hooks/dateformat';
 
 const ExamCard = ({ exam }) => {
     const [showDetails, setShowDetails] = useState(false);
@@ -31,13 +32,13 @@ const ExamCard = ({ exam }) => {
                 {showDetails ? 'Hide Details' : 'Show Details'}
             </button>
             {showDetails && (
-                <div className="mt-2 p-2 flex gap-2 overflow-auto">
+                <div className="mt-2 p-2 flex gap-2 overflow-x-auto">
                     {exam.subject_details.map((subject) => (
                         <div className='border p-2 rounded' key={subject.subject_name}>
                             <p>Subject Name: {subject.subject_name}</p>
                             <p>Total Marks: {subject.total_marks}</p>
-                            <p>Date: {subject.exam_date}</p>
-                            <p>Time: {subject.exam_time}</p>
+                            <p className='text-sm font-extralight'>Date: {dateFormat(subject.exam_date)}</p>
+                            <p className='text-sm font-extralight'>Time: {convertTime(subject.exam_time)}</p>
                         </div>
                     ))}
                 </div>
@@ -73,7 +74,7 @@ export default function ExamsPage() {
                     </button>
                 </Link>
             </div>
-            <div className="container grid grid-cols-2 gap-4">
+            <div className="container grid grid-cols-1 lg:grid-cols-2 gap-4">
                 {exams.map((exam) => (
                     <ExamCard key={exam._id} exam={exam} />
                 ))}

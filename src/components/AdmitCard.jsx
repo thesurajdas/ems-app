@@ -1,4 +1,5 @@
 "use client";
+import { dateFormat, convertTime } from '@/app/hooks/dateformat';
 import html2pdf from 'html2pdf.js';
 import Image from 'next/image';
 import { useEffect } from 'react';
@@ -31,7 +32,7 @@ export default function AdmitCard({ data }) {
                         <div className="mb-8">
                             <h1 className="text-3xl font-bold mb-4">Admit Card</h1>
                             <p className="text-gray-500 font-semibold text-lg">Examination: {data.exam_name}</p>
-                            <p className="text-gray-500 font-extralight">Date: {data.exam_start_date}</p>
+                            <p className="text-gray-500 font-extralight">Date: {dateFormat(data.exam_start_date)}</p>
                         </div>
                         <div className="mb-8">
                             <p className="font-bold">Candidate Name:</p>
@@ -83,8 +84,8 @@ export default function AdmitCard({ data }) {
                                         <tr key={index}>
                                             <td>{index + 1}</td>
                                             <td>{subject.subject_name}</td>
-                                            <td>{subject.exam_date}</td>
-                                            <td>{subject.exam_time}</td>
+                                            <td>{dateFormat(subject.exam_date)}</td>
+                                            <td>{convertTime(subject.exam_time)}</td>
                                         </tr>
                                     ))}
                                 </tbody>

@@ -2,6 +2,7 @@ import Image from 'next/image';
 import { LuCheck, LuX } from 'react-icons/lu';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { dateFormat } from '@/app/hooks/dateformat';
 
 const UserStatus = ({ data }) => {
     if (data == "active") {
@@ -56,7 +57,7 @@ export default function TableRow({ users }) {
                             <UserStatus data={user.status} />
                         </td>
                         <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">{user.role}</td>
-                        <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">{user.createdAt}</td>
+                        <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">{dateFormat(user.createdAt)}</td>
                         <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">{user.course}</td>
                         <td className="px-4 py-4 text-sm whitespace-nowrap">
                             <div className="flex items-center gap-x-6">

@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { UserStatus } from "./TableRow";
+import { dateFormat } from "@/app/hooks/dateformat";
 
 export default function ViewProfile({ id }) {
     const [profile, setProfile] = useState([]);
@@ -41,7 +42,7 @@ export default function ViewProfile({ id }) {
                     <div className="text-2xl font-light">Registration Number: {profile._id}</div>
                     <div className="text-2xl font-light">Mobile Number: {profile.mobile}</div>
                     <div className="text-2xl font-light">Gender: {profile.gender}</div>
-                    <div className="text-2xl font-light">Date of Birth: {profile.dob}</div>
+                    <div className="text-2xl font-light">Date of Birth: {dateFormat(profile.dob)}</div>
                     <div className="text-2xl font-light">Address: {profile.street + ", " + profile.state + ", " + profile.country}</div>
                 </div>
             )
