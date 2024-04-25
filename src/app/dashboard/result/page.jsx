@@ -64,8 +64,8 @@ export default function ResultPage() {
                 <table className="table-auto w-full">
                     <thead>
                         <tr>
-                            <th>Exam Name</th>
-                            <th>Course</th>
+                            {/* <th>Exam Name</th>
+                            <th>Course</th> */}
                             <th>Semester</th>
                             <th>Academic Session</th>
                             <th>Action</th>
@@ -74,8 +74,8 @@ export default function ResultPage() {
                     <tbody>
                         {results && results.map((result, index) => (
                             <tr key={index}>
-                                <td>{result.exam_id}</td>
-                                <td>{result.course_id}</td>
+                                {/* <td>{result.exam_id}</td>
+                                <td>{result.course_id}</td> */}
                                 <td>Semester {result.semester}</td>
                                 <td>{result.session}</td>
                                 <td><button id={"button" + index} onClick={(e) => {

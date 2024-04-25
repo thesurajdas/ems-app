@@ -59,9 +59,9 @@ export default function Table() {
                                             <th scope="col" className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
                                                 Registration Date
                                             </th>
-                                            <th scope="col" className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                                            {/* <th scope="col" className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
                                                 Course
-                                            </th>
+                                            </th> */}
                                             <th scope="col" className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
                                                 <input type="search" onChange={(e) => setSearch(e.target.value)} placeholder="Search..." className="dark:bg-gray-700 bg-gray-200 rounded-xl py-2 px-4 outline-none w-full" />
                                             </th>

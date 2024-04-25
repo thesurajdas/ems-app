@@ -47,7 +47,7 @@ export default function ResultAnalysis() {
     console.log(data.results)
   }
   const getChartData = async (student_id, semester) => {
-    const res = await fetch(`http://localhost:3000/api/chart?student_id=${student_id}&semester=${semester}`, { cache: "no-cache" });
+    const res = await fetch(`http://localhost:3000/api/bar-chart?student_id=${student_id}&semester=${semester}`, { cache: "no-cache" });
     const data = await res.json();
     setCdata(data.chartData);
     console.log(cdata)

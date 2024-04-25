@@ -13,7 +13,21 @@ const CustomPieChart = ({data}) => {
         const options = {
             cutout: '70%',
             maintainAspectRatio: false,
-            hoverOffset: 4
+            hoverOffset: 4,
+            plugins: {
+              title: {
+                  display: true,
+                  text: 'Total Passed and Failed Students',
+                  color: 'white',
+                  font: {
+                      size: 16
+                  },
+                  position: 'bottom',
+                  padding: {
+                      top: 30
+                  }
+              }
+          }
         };
 
         setChartData(data);

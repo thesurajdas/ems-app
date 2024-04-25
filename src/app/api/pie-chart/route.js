@@ -18,7 +18,7 @@ export async function GET(req) {
 
     const res = await Results.find(query);
     const chartData = {
-        labels: ['Passed', 'Failed'],
+        labels: ['Total Passed', 'Total Failed'],
         datasets: [
             {
                 data: [

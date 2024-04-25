@@ -1,3 +1,4 @@
+"use client";
 import Image from 'next/image';
 import { LuCheck, LuX } from 'react-icons/lu';
 import Link from 'next/link';
@@ -58,7 +59,7 @@ export default function TableRow({ users }) {
                         </td>
                         <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">{user.role}</td>
                         <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">{dateFormat(user.createdAt)}</td>
-                        <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">{user.course}</td>
+                        {/* <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">{user.course}</td> */}
                         <td className="px-4 py-4 text-sm whitespace-nowrap">
                             <div className="flex items-center gap-x-6">
                                 <Link href={pathname + "/edit/" + user._id} className="text-gray-500 transition-colors duration-200 dark:hover:text-indigo-500 dark:text-gray-300 hover:text-indigo-500 focus:outline-none">

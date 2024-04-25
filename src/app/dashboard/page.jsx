@@ -8,8 +8,8 @@ const CustomBarChart = dynamic(() => import('@/components/CustomBarChart'), { ss
 
 export default function Dashboard() {
   const [pdata, setPdata] = useState();
-  // const [bdata, setBdata] = useState();
-
+  const [bdata, setBdata] = useState();
+  const [cdata, setCdata] = useState({});
   useEffect(() => {
     const getPieData = async () => {
       const res = await fetch('http://localhost:3000/api/pie-chart');
@@ -17,52 +17,33 @@ export default function Dashboard() {
       setPdata(data.chartData);
       console.log(data.chartData)
     }
-    // const getBarData = async () => {
-    //   const res = await fetch('http://localhost:3000/api/bar-chart');
-    //   const data = await res.json();
-    //   setBdata(data.chartData);
-    // }
-    // getBarData();
+    const getBarData = async () => {
+      const res = await fetch('http://localhost:3000/api/bar-chart?students=1');
+      const data = await res.json();
+      setBdata(data.chartData);
+    }
+    getBarData();
     getPieData();
+  }, []);
+
+  useEffect(() => {
+    const getCdata = async () => {
+      const res = await fetch('http://localhost:3000/api/users?role=student');
+      const res2 = await fetch('http://localhost:3000/api/users?role=teacher');
+      const res3 = await fetch('http://localhost:3000/api/stats?action=avg');
+      const [data, data2, data3] = await Promise.all([res.json(), res2.json(), res3.json()]);
+      setCdata({ students: data.users.length, teachers: data2.users.length, avgMarks: data3.averageMarks[0].average });
+    }
+    getCdata();
   }, [])
-  // const pdata = {
-  //   labels: ['Passed', 'Failed'],
-  //   datasets: [
-  //     {
-  //       data: [7, 3],
-  //     }
-  //   ]
-  // };
-  const bdata = {
-    labels: ['Sem1', 'Sem2', 'Sem3', 'Sem4'],
-    datasets: [
-      {
-        label: 'Marks',
-        data: [40, 50, 70, 80],
-        backgroundColor: [
-          'rgba(255, 159, 64, 0.2)',
-          'rgba(75, 192, 192, 0.2)',
-          'rgba(54, 162, 235, 0.2)',
-          'rgba(153, 102, 255, 0.2)'
-        ],
-        borderColor: [
-          'rgb(255, 159, 64)',
-          'rgb(75, 192, 192)',
-          'rgb(54, 162, 235)',
-          'rgb(153, 102, 255)'
-        ],
-        borderWidth: 1
-      }
-    ]
-  };
   return (
     <>
       <h1 className="text-gray-800 dark:text-gray-100 ml-4">Dashboard</h1>
       <div className="container rounded-lg w-full">
         <section className="grid grid-cols-2 md:grid-cols-3 gap-4 m-4">
-          <CommonCard title={"No of Students"} cardValue={10} />
-          <CommonCard title={"Student Performance"} cardValue={"40%"} />
-          <CommonCard title={"Attendance Percentage"} cardValue={"10%"} />
+          {cdata.students && <CommonCard title={"Total Students"} cardValue={cdata.students} />}
+          {cdata.teachers && <CommonCard title={"Total Teachers"} cardValue={cdata.teachers} />}
+          {cdata.avgMarks && <CommonCard title={"Average Marks"} cardValue={cdata.avgMarks+"%"} />}
         </section>
         <section className="m-4 grid grid-cols-2 gap-4">
           {bdata && <CustomBarChart data={bdata} />}

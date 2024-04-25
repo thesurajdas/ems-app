@@ -3,33 +3,35 @@ import { NextResponse } from "next/server";
 import Users from "@/models/users";
 
 export async function GET(request) {
-    const student_id = request.nextUrl.searchParams.get("student_id");
-    const course_id = request.nextUrl.searchParams.get("course_id");
-    const semester = Number(request.nextUrl.searchParams.get("semester"));
-    const session = Number(request.nextUrl.searchParams.get("session"));
+    const req = request.nextUrl.searchParams;
+    const student_id = req.get("student_id");
+    const course_id = req.get("course_id");
+    const semester = req.get("semester");
+    const session = req.get("session");
+    const role = req.get("role");
 
     await connectMongoDB();
 
     let query = {};
-    if (student_id) query._id = student_id;
-    if (course_id) query.course = course_id;
-    if (semester) query.semester = semester;
-    if (session) query.session = session;
-    
+    if (student_id) query._id = student_id || "";
+    if (course_id) query.course = course_id || "";
+    if (semester) query.semester = Number(semester) || "";
+    if (session) query.session = Number(session) || "";
+    if (role) query.role = role || "";
 
-    if (student_id !== null || course_id !== null || semester !== null) {
+    if (Object.keys(query).length > 0) {
         const users = await Users.find(query);
-        return NextResponse.json({ users, length: users.length }, { status: 200 });
+        return NextResponse.json({ users, length: users.length }, { status: 201 });
     }
-
-    const req = request.nextUrl.searchParams;
-    const name = req.get("q") || "";
-    const page = Number(req.get("page")) || 1;
-    const limit = Number(req.get("limit")) || 5;
-    const skip = (page - 1) * limit;
-    const length = await Users.countDocuments({ name: { "$regex": name, "$options": "i" } });
-    const users = await Users.find({ name: { "$regex": name, "$options": "i" } }).skip(skip).limit(limit);
-    return NextResponse.json({ users, length }, { status: 200 });
+    else {
+        const name = req.get("q") || "";
+        const page = Number(req.get("page")) || 1;
+        const limit = Number(req.get("limit")) || 5;
+        const skip = (page - 1) * limit;
+        const length = await Users.countDocuments({ name: { "$regex": name, "$options": "i" } });
+        const users = await Users.find({ name: { "$regex": name, "$options": "i" } }).skip(skip).limit(limit);
+        return NextResponse.json({ users, length }, { status: 200 });
+    }
 }
 
 export async function POST(request) {
