@@ -3,7 +3,6 @@ import CustomBarChart from "@/components/CustomBarChart";
 import { useEffect, useState } from "react";
 
 export default function ResultAnalysis() {
-  const [btn, setBtn] = useState(true);
   const [courses, setCourses] = useState([]);
   const [exams, setExams] = useState([]);
   const [users, setUsers] = useState([]);
@@ -22,7 +21,6 @@ export default function ResultAnalysis() {
       session: '',
       user: '',
     });
-    setBtn(true);
     setCdata();
   }
 
