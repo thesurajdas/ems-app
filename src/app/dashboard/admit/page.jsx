@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import AdmitCard from "@/components/AdmitCard";
-import {dateFormat} from "@/app/hooks/dateformat";
+import { dateFormat } from "@/app/hooks/dateformat";
 
 export default function Admit() {
     const [exams, setExams] = useState();
@@ -56,7 +56,6 @@ export default function Admit() {
                     <thead>
                         <tr>
                             <th>Exam Name</th>
-                            <th>Course</th>
                             <th>Academic Session</th>
                             <th>Exam Start Date</th>
                             <th>Action</th>
@@ -66,10 +65,9 @@ export default function Admit() {
                         {exams && exams.map((exam, index) => (
                             <tr key={index}>
                                 <td>{exam.name}</td>
-                                <td>{exam.course_id}</td>
                                 <td>Semester {exam.semester}</td>
                                 <td>{dateFormat(exam.subject_details[0].exam_date)}</td>
-                                <td><button onClick={(e) => handleView(exam) } className="bg-yellow-500 hover:bg-yellow-600 py-2 px-4 rounded">{(showAdmit) ? "Hide" : "Show"}</button></td>
+                                <td><button onClick={(e) => handleView(exam)} className="bg-yellow-500 hover:bg-yellow-600 py-2 px-4 rounded">{(showAdmit) ? "Hide" : "Show"}</button></td>
                             </tr>
                         ))}
                     </tbody>

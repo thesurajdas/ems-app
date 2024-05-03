@@ -36,7 +36,7 @@ export default function AdmitCard({ data }) {
                         </div>
                         <div className="mb-8">
                             <p className="font-bold">Candidate Name:</p>
-                            <p>John Doe</p>
+                            <p>Suraj Das</p>
                         </div>
                         <div className="mb-8">
                             <p className="font-bold">Roll Number:</p>
@@ -44,7 +44,7 @@ export default function AdmitCard({ data }) {
                         </div>
                         <div className="mb-8">
                             <p className="font-bold">Degree:</p>
-                            <p>{data.exam_course}</p>
+                            <p>MCA</p>
                         </div>
                         <div className="mb-8">
                             <p className="font-bold">Semester:</p>

@@ -84,6 +84,7 @@ export default function CreateCourse() {
 
   return (
     <>
+    <h1 className="ml-4">Create Courses</h1>
       <form onSubmit={createCourse}>
         <div className="container w-full mx-auto grid rid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-4 rounded py-4">
           <label htmlFor="qualification">Qualification <span className="text-gray-500">*</span>
