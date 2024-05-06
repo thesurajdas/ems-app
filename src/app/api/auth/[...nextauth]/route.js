@@ -26,7 +26,7 @@ export const authOptions = {
                     }
                     return user;
                 } catch (error) {
-
+                    return null;
                 }
             }
         }),
@@ -37,7 +37,18 @@ export const authOptions = {
             clientSecret: process.env.GITHUB_CLIENT_SECRET
         })
     ],
-
+    callbacks: {
+        async jwt({ token, user }) {
+          if (user) token.role = user.role;
+          if (user) token._id = user._id;
+          return token;
+        },
+        async session({ session, token }) {
+          if (session?.user) session.user.role = token.role;
+          if (session?.user) session.user._id = token._id;
+          return session;
+        },
+      },
     session: {
         strategy: "jwt"
     },
