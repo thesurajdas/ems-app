@@ -25,29 +25,29 @@ export default function ResultAnalysis() {
   }
 
   const courseData = async () => {
-    const res = await fetch('http://localhost:3000/api/courses', { cache: "no-cache" });
+    const res = await fetch('/api/courses', { cache: "no-cache" });
     const data = await res.json();
     setCourses(data.courses);
   }
   const examData = async (course_id) => {
-    const res = await fetch(`http://localhost:3000/api/exams?course_id=${course_id}`, { cache: "no-cache" });
+    const res = await fetch(`/api/exams?course_id=${course_id}`, { cache: "no-cache" });
     const data = await res.json();
     setExams(data.exams);
   }
   const usersData = async (course_id, session) => {
-    const res = await fetch(`http://localhost:3000/api/users?course_id=${course_id}&session=${session}&role=student`, { cache: "no-cache" });
+    const res = await fetch(`/api/users?course_id=${course_id}&session=${session}&role=student`, { cache: "no-cache" });
     const data = await res.json();
     setUsers(data.users);
     console.log(data.users)
   }
   const resultData = async (user_id) => {
-    const res = await fetch(`http://localhost:3000/api/results?student_id=${user_id}`, { cache: "no-cache" });
+    const res = await fetch(`/api/results?student_id=${user_id}`, { cache: "no-cache" });
     const data = await res.json();
     setResults(data.results);
     console.log(data.results)
   }
   const getChartData = async (student_id, semester) => {
-    const res = await fetch(`http://localhost:3000/api/bar-chart?student_id=${student_id}&semester=${semester}`, { cache: "no-cache" });
+    const res = await fetch(`/api/bar-chart?student_id=${student_id}&semester=${semester}`, { cache: "no-cache" });
     const data = await res.json();
     setCdata(data.chartData);
     console.log(cdata)

@@ -39,7 +39,7 @@ export default function Admit() {
     };
     useEffect(() => {
         const fecthData = async (id) => {
-            const res = await fetch(`http://localhost:3000/api/exams?course=${course_id}&semester=${semester}&session=${sessionx}`, {
+            const res = await fetch(`/api/exams?course=${course_id}&semester=${semester}&session=${sessionx}`, {
                 method: "GET",
                 headers: { "Content-Type": "application/json" },
                 cache: "no-cache"

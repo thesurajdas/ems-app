@@ -21,7 +21,7 @@ export default function CoursesPage() {
   ];
 
   const fetchData = async () => {
-    const response = await fetch('http://localhost:3000/api/courses');
+    const response = await fetch('/api/courses');
     const data = await response.json();
     console.log(data.courses)
     setCourses({

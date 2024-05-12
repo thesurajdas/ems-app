@@ -12,13 +12,13 @@ export default function Dashboard() {
   const [cdata, setCdata] = useState({});
   useEffect(() => {
     const getPieData = async () => {
-      const res = await fetch('http://localhost:3000/api/pie-chart');
+      const res = await fetch('/api/pie-chart');
       const data = await res.json();
       setPdata(data.chartData);
       // console.log(data.chartData)
     }
     const getBarData = async () => {
-      const res = await fetch('http://localhost:3000/api/bar-chart?students=1');
+      const res = await fetch('/api/bar-chart?students=1');
       const data = await res.json();
       setBdata(data.chartData);
     }
@@ -28,9 +28,9 @@ export default function Dashboard() {
 
   useEffect(() => {
     const getCdata = async () => {
-      const res = await fetch('http://localhost:3000/api/users?role=student');
-      const res2 = await fetch('http://localhost:3000/api/users?role=teacher');
-      const res3 = await fetch('http://localhost:3000/api/stats?action=avg');
+      const res = await fetch('/api/users?role=student');
+      const res2 = await fetch('/api/users?role=teacher');
+      const res3 = await fetch('/api/stats?action=avg');
       const [data, data2, data3] = await Promise.all([res.json(), res2.json(), res3.json()]);
       setCdata({ students: data.users.length, teachers: data2.users.length, avgMarks: data3.averageMarks[0].average });
     }
@@ -43,7 +43,7 @@ export default function Dashboard() {
         <section className="grid grid-cols-2 md:grid-cols-3 gap-4 m-4">
           {cdata.students && <CommonCard title={"Total Students"} cardValue={cdata.students} />}
           {cdata.teachers && <CommonCard title={"Total Teachers"} cardValue={cdata.teachers} />}
-          {cdata.avgMarks && <CommonCard title={"Average Marks"} cardValue={(cdata.avgMarks).toFixed(2)+"%"} />}
+          {cdata.avgMarks && <CommonCard title={"Average Marks"} cardValue={(cdata.avgMarks).toFixed(2) + "%"} />}
         </section>
         <section className="m-4 grid grid-cols-2 gap-4">
           {bdata && <CustomBarChart data={bdata} />}

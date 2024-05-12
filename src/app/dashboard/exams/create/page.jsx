@@ -34,7 +34,7 @@ export default function Exams() {
 
     useEffect(() => {
         const fetchCourses = async () => {
-            const res = await fetch('http://localhost:3000/api/courses', { cache: 'no-store' });
+            const res = await fetch('/api/courses', { cache: 'no-store' });
             const datac = await res.json();
             setCourses(datac.courses);
         }
@@ -52,7 +52,7 @@ export default function Exams() {
     const createExam = async (e) => {
         e.preventDefault();
         console.log(data);
-        const res = await fetch('http://localhost:3000/api/exams', {
+        const res = await fetch('/api/exams', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

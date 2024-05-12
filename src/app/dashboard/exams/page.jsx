@@ -52,7 +52,7 @@ export default function ExamsPage() {
     useEffect(() => {
         const fetchExams = async () => {
             try {
-                const res = await fetch('http://localhost:3000/api/exams', { cache: "no-store" });
+                const res = await fetch('/api/exams', { cache: "no-store" });
                 const data = await res.json();
                 setExams(data.exams);
             } catch (error) {

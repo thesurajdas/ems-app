@@ -29,7 +29,7 @@ export default function CreateUser() {
   const [courses, setCourses] = useState([]);
   useEffect(() => {
     const getCourses = async () => {
-      const res = await fetch("http://localhost:3000/api/courses", { cache: 'no-store' });
+      const res = await fetch("/api/courses", { cache: 'no-store' });
       const datac = await res.json();
       setCourses(datac.courses);
     }
@@ -47,7 +47,7 @@ export default function CreateUser() {
   }, [data.course]);
   const createUser = async (e) => {
     e.preventDefault();
-    const res = await fetch("http://localhost:3000/api/users", {
+    const res = await fetch("/api/users", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

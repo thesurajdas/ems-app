@@ -10,13 +10,13 @@ export default function ResultPage() {
     const [showResult, setShowResult] = useState(false);
     const [resultsData, setResultsData] = useState({});
     const handleView = async (results) => {
-        const res = await fetch(`http://localhost:3000/api/exams?exam_id=${results.exam_id}`, {
+        const res = await fetch(`/api/exams?exam_id=${results.exam_id}`, {
             method: "GET",
             headers: { "Content-Type": "application/json" },
             cache: "no-cache"
         });
         const data = await res.json();
-        const res2 = await fetch(`http://localhost:3000/api/courses?id=${data.exam.course_id}`, {
+        const res2 = await fetch(`/api/courses?id=${data.exam.course_id}`, {
             method: "GET",
             headers: { "Content-Type": "application/json" },
             cache: "no-cache"
@@ -46,7 +46,7 @@ export default function ResultPage() {
         })
         const student_id = session?.user?._id;
         const fecthData = async (id) => {
-            const res = await fetch(`http://localhost:3000/api/results?student_id=${student_id}`, {
+            const res = await fetch(`/api/results?student_id=${student_id}`, {
                 method: "GET",
                 headers: { "Content-Type": "application/json" },
                 cache: "no-cache"
@@ -61,8 +61,8 @@ export default function ResultPage() {
     return (
         <>
             <h1 className="my-4">Results</h1>
-            {session?.user?.role === "teacher" && <Link href='http://localhost:3000/dashboard/result/create'><button className="bg-blue-500 hover:bg-blue-600 py-2 px-4 rounded my-4">Add Result</button></Link>}
-            {session?.user?.role === "admin" && <Link href='http://localhost:3000/dashboard/result/create'><button className="bg-blue-500 hover:bg-blue-600 py-2 px-4 rounded my-4">Add Result</button></Link>}
+            {session?.user?.role === "teacher" && <Link href='/dashboard/result/create'><button className="bg-blue-500 hover:bg-blue-600 py-2 px-4 rounded my-4">Add Result</button></Link>}
+            {session?.user?.role === "admin" && <Link href='/dashboard/result/create'><button className="bg-blue-500 hover:bg-blue-600 py-2 px-4 rounded my-4">Add Result</button></Link>}
             {session?.user?.role === "student" &&
                 <div className="overflow-x-auto">
                     <table className="table-auto w-full">
