@@ -2,8 +2,10 @@
 import { useEffect, useState } from "react";
 import MarkSheet from "@/components/Marksheet";
 import Link from "next/link";
+import { useSession } from "next-auth/react";
 
 export default function ResultPage() {
+    const { data: session } = useSession();
     const [results, setResults] = useState();
     const [showResult, setShowResult] = useState(false);
     const [resultsData, setResultsData] = useState({});
@@ -39,10 +41,10 @@ export default function ResultPage() {
     useEffect(() => {
         setResultsData({
             ...resultsData,
-            student_name: "John Doe",
-            student_id: "65ff480a8ee837317822fb1b",
+            student_name: session?.user?.name,
+            student_id: session?.user?._id,
         })
-        const student_id = "65ff480a8ee837317822fb1b"; //Make it dynamic
+        const student_id = session?.user?._id;
         const fecthData = async (id) => {
             const res = await fetch(`http://localhost:3000/api/results?student_id=${student_id}`, {
                 method: "GET",
@@ -59,38 +61,41 @@ export default function ResultPage() {
     return (
         <>
             <h1 className="my-4">Results</h1>
-            <Link href='http://localhost:3000/dashboard/result/create'><button className="bg-blue-500 hover:bg-blue-600 py-2 px-4 rounded my-4">Add Result</button></Link>
-            <div className="overflow-x-auto">
-                <table className="table-auto w-full">
-                    <thead>
-                        <tr>
-                            {/* <th>Exam Name</th>
+            {session?.user?.role === "teacher" && <Link href='http://localhost:3000/dashboard/result/create'><button className="bg-blue-500 hover:bg-blue-600 py-2 px-4 rounded my-4">Add Result</button></Link>}
+            {session?.user?.role === "admin" && <Link href='http://localhost:3000/dashboard/result/create'><button className="bg-blue-500 hover:bg-blue-600 py-2 px-4 rounded my-4">Add Result</button></Link>}
+            {session?.user?.role === "student" &&
+                <div className="overflow-x-auto">
+                    <table className="table-auto w-full">
+                        <thead>
+                            <tr>
+                                {/* <th>Exam Name</th>
                             <th>Course</th> */}
-                            <th>Semester</th>
-                            <th>Academic Session</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {results && results.map((result, index) => (
-                            <tr key={index}>
-                                {/* <td>{result.exam_id}</td>
-                                <td>{result.course_id}</td> */}
-                                <td>Semester {result.semester}</td>
-                                <td>{result.session}</td>
-                                <td><button id={"button" + index} onClick={(e) => {
-                                    handleView(results[index])
-                                    if (document.getElementById("button" + index).textContent === "View") {
-                                        document.getElementById("button" + index).textContent = "Hide"
-                                    } else {
-                                        document.getElementById("button" + index).textContent = "View"
-                                    }
-                                }} className="bg-yellow-500 hover:bg-yellow-600 py-2 px-4 rounded">View</button></td>
+                                <th>Semester</th>
+                                <th>Academic Session</th>
+                                <th>Action</th>
                             </tr>
-                        ))}
-                    </tbody>
-                </table>
-            </div>
+                        </thead>
+                        <tbody>
+                            {results && results.map((result, index) => (
+                                <tr key={index}>
+                                    {/* <td>{result.exam_id}</td>
+                                <td>{result.course_id}</td> */}
+                                    <td>Semester {result.semester}</td>
+                                    <td>{result.session}</td>
+                                    <td><button id={"button" + index} onClick={(e) => {
+                                        handleView(results[index])
+                                        if (document.getElementById("button" + index).textContent === "View") {
+                                            document.getElementById("button" + index).textContent = "Hide"
+                                        } else {
+                                            document.getElementById("button" + index).textContent = "View"
+                                        }
+                                    }} className="bg-yellow-500 hover:bg-yellow-600 py-2 px-4 rounded">View</button></td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+            }
             {showResult && <MarkSheet data={resultsData} />}
         </>
     )

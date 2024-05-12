@@ -20,9 +20,9 @@ export default function NavBar() {
                     </span>
                     {dropdown && (
                         <div className="absolute bg-slate-200 dark:bg-gray-700 w-fit">
-                            <div className="bg-slate-200 dark:bg-gray-700 dark:text-white py-2 px-4">My Profile</div>
+                            <Link href="/dashboard/profile"><div className="bg-slate-200 dark:bg-gray-700 dark:text-white py-2 px-4">My Profile</div></Link>
                             <Link href="/dashboard/admit"> <div className="bg-slate-200 dark:bg-gray-700 dark:text-white py-2 px-4">My Admit</div></Link>
-                            <div className="bg-slate-200 dark:bg-gray-700 dark:text-white py-2 px-4">Settings</div>
+                            {/* <div className="bg-slate-200 dark:bg-gray-700 dark:text-white py-2 px-4">Settings</div> */}
                             <div onClick={()=>signOut()} className="bg-slate-200 dark:bg-gray-700 dark:text-white py-2 px-4">Logout</div>
                         </div>
                     )}

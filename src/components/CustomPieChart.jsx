@@ -4,7 +4,7 @@ import { Chart } from 'primereact/chart';
 import 'chart.js/auto';
 
 
-const CustomPieChart = ({data}) => {
+const CustomPieChart = ({ data }) => {
     const [chartData, setChartData] = useState({});
     const [chartOptions, setChartOptions] = useState({});
 
@@ -15,19 +15,19 @@ const CustomPieChart = ({data}) => {
             maintainAspectRatio: false,
             hoverOffset: 4,
             plugins: {
-              title: {
-                  display: true,
-                  text: 'Total Passed and Failed Students',
-                  color: 'white',
-                  font: {
-                      size: 16
-                  },
-                  position: 'bottom',
-                  padding: {
-                      top: 30
-                  }
-              }
-          }
+                title: {
+                    display: true,
+                    text: 'Total Passed and Failed Students',
+                    color: 'white',
+                    font: {
+                        size: 16
+                    },
+                    position: 'bottom',
+                    padding: {
+                        top: 30
+                    }
+                }
+            }
         };
 
         setChartData(data);
@@ -35,13 +35,13 @@ const CustomPieChart = ({data}) => {
     }, []);
 
 
-  return (
-    <div className="bg-white dark:bg-gray-700 p-4 rounded-lg shadow">
+    return (
+        <div className="bg-white dark:bg-gray-700 p-10 rounded-lg shadow">
             <div className="card flex justify-content-center">
-            <Chart type="doughnut" data={chartData} options={chartOptions} className="w-full md:w-30rem" />
+                <Chart type="doughnut" data={chartData} options={chartOptions} className="w-full md:w-30rem" />
+            </div>
         </div>
-        </div>
-  );
+    );
 };
 
-export default CustomPieChart ;
+export default CustomPieChart;

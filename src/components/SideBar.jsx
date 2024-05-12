@@ -49,7 +49,7 @@ const SideBar = () => {
 
     return (
         <div className="bg-slate-200 dark:bg-gray-800 h-screen overflow-auto">
-            <h2 className="p-4 text-center">EM System</h2>
+            <Link href="/"><h2 className="p-4 text-center">EM System</h2></Link>
             <ul className="p-6">
                 {links.map((link, index) => (
                     <li key={index} className="mb-2">

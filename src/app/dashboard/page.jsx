@@ -43,7 +43,7 @@ export default function Dashboard() {
         <section className="grid grid-cols-2 md:grid-cols-3 gap-4 m-4">
           {cdata.students && <CommonCard title={"Total Students"} cardValue={cdata.students} />}
           {cdata.teachers && <CommonCard title={"Total Teachers"} cardValue={cdata.teachers} />}
-          {cdata.avgMarks && <CommonCard title={"Average Marks"} cardValue={cdata.avgMarks+"%"} />}
+          {cdata.avgMarks && <CommonCard title={"Average Marks"} cardValue={(cdata.avgMarks).toFixed(2)+"%"} />}
         </section>
         <section className="m-4 grid grid-cols-2 gap-4">
           {bdata && <CustomBarChart data={bdata} />}
