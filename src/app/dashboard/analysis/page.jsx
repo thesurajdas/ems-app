@@ -35,7 +35,7 @@ export default function ResultAnalysis() {
     setExams(data.exams);
   }
   const usersData = async (course_id, session) => {
-    const res = await fetch(`http://localhost:3000/api/users?course_id=${course_id}&session=${session}`, { cache: "no-cache" });
+    const res = await fetch(`http://localhost:3000/api/users?course_id=${course_id}&session=${session}&role=student`, { cache: "no-cache" });
     const data = await res.json();
     setUsers(data.users);
     console.log(data.users)

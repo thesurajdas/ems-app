@@ -31,6 +31,16 @@ export default function LoginPage() {
   return (
     <>
       <div className="my-40 bg-slate-300 dark:bg-slate-900 mx-[30%] px-5 py-3 border-t-4 border-t-blue-600 shadow-lg rounded-lg">
+        <div className="flex">
+          <button onClick={(e) => {
+            setEmail("suraj4apps@gmail.com")
+            setPassword("12345")
+          }} className="bg-blue-500 py-2 px-4 text-white rounded-2xl mx-16 hover:bg-blue-600">Student Account</button>
+          <button onClick={(e) => {
+            setEmail("anurup@gmail.com")
+            setPassword("12345")
+          }} className="bg-green-500 py-2 px-4 text-white rounded-2xl mx-16 hover:bg-green-600">Teacher Account</button>
+        </div>
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           <h1 className="font-bold text-xl my-4">Enter Details to Login</h1>
           <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} name="email" id="email" placeholder="Email" required />

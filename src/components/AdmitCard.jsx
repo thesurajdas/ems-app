@@ -1,32 +1,23 @@
 "use client";
 import { dateFormat, convertTime } from '@/app/hooks/dateformat';
-import html2pdf from 'html2pdf.js';
+import { useReactToPrint } from 'react-to-print';
 import Image from 'next/image';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { LuDownload } from 'react-icons/lu';
 
 export default function AdmitCard({ data }) {
-    const printAdmitCard = async () => {
-        const element = document.getElementById("admit-card");
-        const options = {
-            margin: 0,
-            filename: 'admit-card.pdf',
-            image: { type: 'jpeg', quality: 0.98 },
-            html2canvas: { scale: 2 },
-            jsPDF: { unit: 'in', format: 'a4', orientation: 'landscape' }
-        };
-        html2pdf().from(element).set(options).save();
-    }
-    useEffect(() => {
-        console.log(data)
-    }, [])
+    const componentRef = useRef();
+    const printAdmitCard = useReactToPrint({
+        content: () => componentRef.current,
+    });
+
     return (
         <>
             <div className="flex items-center justify-between my-4">
                 <div className="text-gray-400">This is your admit card for the upcoming examination. Please read the instructions carefully.</div>
                 <button onClick={printAdmitCard} className="bg-green-500 hover:bg-green-600 flex items-center py-2 px-4 rounded-full gap-1"> <LuDownload /> Download Admit</button>
             </div>
-            <div id="admit-card" className="bg-slate-200 dark:bg-slate-700 rounded-lg shadow-lg p-8 max-w-full">
+            <div ref={componentRef} className="bg-slate-200 dark:bg-slate-700 rounded-lg shadow-lg p-8 max-w-full">
                 <div className="flex justify-between">
                     <div className="w-1/2 pr-4">
                         <div className="mb-8">

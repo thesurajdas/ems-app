@@ -41,11 +41,17 @@ export const authOptions = {
         async jwt({ token, user }) {
           if (user) token.role = user.role;
           if (user) token._id = user._id;
+          if (user) token.course = user.course;
+          if (user) token.semester = user.semester;
+          if (user) token.session = user.session;
           return token;
         },
         async session({ session, token }) {
           if (session?.user) session.user.role = token.role;
           if (session?.user) session.user._id = token._id;
+          if (session?.user) session.user.course = token.course;
+          if (session?.user) session.user.semester = token.semester;
+          if (session?.user) session.user.session = token.session;
           return session;
         },
       },

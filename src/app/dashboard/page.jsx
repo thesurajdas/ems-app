@@ -15,7 +15,7 @@ export default function Dashboard() {
       const res = await fetch('http://localhost:3000/api/pie-chart');
       const data = await res.json();
       setPdata(data.chartData);
-      console.log(data.chartData)
+      // console.log(data.chartData)
     }
     const getBarData = async () => {
       const res = await fetch('http://localhost:3000/api/bar-chart?students=1');

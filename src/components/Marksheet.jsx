@@ -1,6 +1,6 @@
 "use client";
-import { useEffect, useState } from "react";
-import html2pdf from 'html2pdf.js';
+import { useEffect, useRef, useState } from "react";
+import { useReactToPrint } from "react-to-print";
 import { LuDownload } from 'react-icons/lu';
 import { LiaUniversitySolid } from "react-icons/lia";
 
@@ -25,27 +25,17 @@ export default function MarkSheet({ data }) {
             return <b className="text-red-500">F</b>;
         }
     }
-    const printMarkSheet = async () => {
-        const element = document.getElementById("mark-sheet");
-        const options = {
-            margin: 0,
-            filename: 'mark-sheet.pdf',
-            image: { type: 'jpeg', quality: 0.98 },
-            html2canvas: { scale: 2 },
-            jsPDF: { unit: 'in', format: 'a4', orientation: 'landscape' }
-        };
-        html2pdf().from(element).set(options).save();
-    }
-    useEffect(() => {
-        console.log(data)
-    }, [])
+    const componentRef = useRef();
+    const printMarkSheet = useReactToPrint({
+        content: () => componentRef.current,
+    });
     return (
         <>
             <div className="flex items-center justify-between my-4">
                 <div className="text-gray-400">This is your marksheet.</div>
                 <button onClick={printMarkSheet} className="bg-green-500 hover:bg-green-600 flex items-center py-2 px-4 rounded-full gap-1"> <LuDownload /> Download Marksheet</button>
             </div>
-            <div id="mark-sheet" className="bg-slate-200 dark:bg-slate-700 rounded-lg shadow-lg p-8 max-w-full">
+            <div ref={componentRef} className="bg-slate-200 dark:bg-slate-700 rounded-lg shadow-lg p-8 max-w-full">
                 <div className="flex items-center justify-between">
                     <div className="flex items-center gap-4">
                         <div className="relative w-20 h-20">

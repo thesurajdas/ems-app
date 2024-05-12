@@ -2,8 +2,13 @@
 import { useEffect, useState } from "react";
 import AdmitCard from "@/components/AdmitCard";
 import { dateFormat } from "@/app/hooks/dateformat";
+import { useSession } from "next-auth/react";
 
 export default function Admit() {
+    const { data: session } = useSession();
+    const course_id = session?.user?.course; //Make it dynamic
+    const semester = session?.user?.semester; //Make it dynamic
+    const sessionx = session?.user?.session;
     const [exams, setExams] = useState();
     const [showAdmit, setShowAdmit] = useState(false);
     const [admitData, setAdmitData] = useState({
@@ -33,11 +38,8 @@ export default function Admit() {
         console.log(admitData)
     };
     useEffect(() => {
-        const course_id = "65fc45581bd9c281c805197f"; //Make it dynamic
-        const semester = 2; //Make it dynamic
-        const session = 2023;
         const fecthData = async (id) => {
-            const res = await fetch(`http://localhost:3000/api/exams?course=${course_id}&semester=${semester}&session=${session}`, {
+            const res = await fetch(`http://localhost:3000/api/exams?course=${course_id}&semester=${semester}&session=${sessionx}`, {
                 method: "GET",
                 headers: { "Content-Type": "application/json" },
                 cache: "no-cache"
