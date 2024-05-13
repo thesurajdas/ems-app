@@ -30,8 +30,8 @@ export default function LoginPage() {
   }
   return (
     <>
-      <div className="my-40 bg-slate-300 dark:bg-slate-900 mx-[30%] px-5 py-3 border-t-4 border-t-blue-600 shadow-lg rounded-lg">
-        <div className="flex">
+      <div className="my-40 bg-slate-300 dark:bg-slate-900 mx-16 md:mx-52 lg:mx-96 px-5 py-3 border-t-4 border-t-blue-600 shadow-lg rounded-lg">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
           <button onClick={(e) => {
             setEmail("suraj4apps@gmail.com")
             setPassword("12345")

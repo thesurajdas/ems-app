@@ -40,12 +40,12 @@ export default function Dashboard() {
     <>
       <h1 className="text-gray-800 dark:text-gray-100 ml-4">Dashboard</h1>
       <div className="container rounded-lg w-full">
-        <section className="grid grid-cols-2 md:grid-cols-3 gap-4 m-4">
+        <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 m-4">
           {cdata.students && <CommonCard title={"Total Students"} cardValue={cdata.students} />}
           {cdata.teachers && <CommonCard title={"Total Teachers"} cardValue={cdata.teachers} />}
           {cdata.avgMarks && <CommonCard title={"Average Marks"} cardValue={(cdata.avgMarks).toFixed(2) + "%"} />}
         </section>
-        <section className="m-4 grid grid-cols-2 gap-4">
+        <section className="m-4 grid grid-cols-1 md:grid-cols-2 gap-4">
           {bdata && <CustomBarChart data={bdata} />}
           {pdata && <CustomPieChart data={pdata} />}
         </section>
